@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  db:
+    image: mysql:latest
+    container_name: iab_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: iab
+      MYSQL_USER: iab
+      MYSQL_PASSWORD: iab
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+volumes:
+  dbdata:
