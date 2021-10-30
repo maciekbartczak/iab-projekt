@@ -6,6 +6,7 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { AuthComponent } from './auth.component';
 import { NbButtonModule, NbCardModule, NbInputModule, NbLayoutModule } from "@nebular/theme";
+import { FormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NbButtonModule, NbCardModule, NbInputModule, NbLayoutModule } from "@ne
     NbLayoutModule,
     NbCardModule,
     NbInputModule,
-    NbButtonModule
+    NbButtonModule,
+    FormsModule
   ]
 })
 export class AuthModule { }

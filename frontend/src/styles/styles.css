@@ -1,0 +1,10 @@
+@import "auth/app-login.css";
+
+* {
+  box-sizing: border-box;
+}
+
+app-root .main-col {
+    padding: 0 !important;
+}
+
