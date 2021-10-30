@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { loginRequest } from "../../../models/auth";
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  public loginRequest = {
+  public loginRequest: loginRequest = {
     username: '',
     password: ''
   }
