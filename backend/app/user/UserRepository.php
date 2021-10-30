@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../lib/Database.php';
-require_once __DIR__ . '/UserDTO.php';
+require_once __DIR__ . '/CreateUserRequest.php';
 require_once __DIR__ . '/User.php';
 
 class UserRepository {
@@ -12,34 +12,38 @@ class UserRepository {
         $this->db = Database::get_instance();
     }
 
-    public function saveUser(UserDTO $userDTO)
+    public function saveUser(CreateUserRequest $createUserRequest)
     {
         try
         {
             $statement = $this->db->prepare('INSERT INTO user (role_id, username, password) VALUES (1, :username, :password)');
-            $statement->bindParam(':username', $userDTO->username);
-            $statement->bindParam(':password', $userDTO->password);
+            $statement->bindParam(':username', $createUserRequest->username);
+            $statement->bindParam(':password', $createUserRequest->password);
             $statement->execute();
         } catch (PDOException $e) {
             var_dump($e);
         }
     }
 
-    public function getUserByUsername(string $username)
+    public function getUserByUsername(string $username): ?User
     {
         try
         {
             $statement = $this->db->prepare('SELECT * FROM user WHERE username = :username');
             $statement->bindParam(':username', $username);
             $statement->execute();
-            return $statement->fetchObject('User');
-        } catch (PDOException $e) {
+            $user = $statement->fetchObject('User');
+            if ($user) {
+                return $user;
+            }
+        } catch (PDOException $e)
+        {
             var_dump($e);
         }
         return null;
     }
 
-    public function getUserDetailsById(int $id)
+    public function getUserDetailsById(int $id): ?UserDetails
     {
         try
         {
@@ -47,8 +51,13 @@ class UserRepository {
             $statement = $this->db->prepare($query);
             $statement->bindParam(':id', $id);
             $statement->execute();
-            return $statement->fetchObject('UserDetails');
-        } catch (PDOException $e) {
+            $userDetails = $statement->fetchObject('UserDetails');
+            if($userDetails)
+            {
+                return $userDetails;
+            }
+        } catch (PDOException $e)
+        {
             var_dump($e);
         }
         return null;

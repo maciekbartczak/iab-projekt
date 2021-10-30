@@ -1,11 +1,15 @@
 <?php
 
+require __DIR__ . '/../env.php';
 use Firebase\JWT\JWT;
 
 class JwtUtils {
 
-    public static function createJWT(UserDetails $userDetails) {
-        $secretKey  = 'bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=';
+    public static function createJWT(UserDetails $userDetails): string
+    {
+        global $env;
+
+        $secretKey  = $env['jwt_secret'];
         $issuedAt   = new DateTimeImmutable();
         $expire     = $issuedAt->modify('+6 minutes')->getTimestamp();
         $serverName = "localhost";

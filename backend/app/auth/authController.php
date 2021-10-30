@@ -2,13 +2,22 @@
 
 require_once __DIR__ . '/../user/UserDetails.php';
 require_once __DIR__ . '/../user/UserRepository.php';
-require_once __DIR__ . '/../user/UserDTO.php';
+require_once __DIR__ . '/../user/User.php';
+require_once __DIR__ . '/../user/CreateUserRequest.php';
 require_once __DIR__ . '/../lib/JwtUtils.php';
 
 
 Router::post('/api/auth/register', function (Request $req, Response $res) {
 
+    $user_repository = new UserRepository();
+
     $username = $req->get_param('username');
+    $user = $user_repository->getUserByUsername($username);
+    if ($user) {
+        $res->body(['error' => 'user-exists'])->status(HTTP_STATUS::BAD_REQUEST)->send();
+        return ;
+    }
+
     $password = password_hash($req->get_param('password'), PASSWORD_DEFAULT);
 
     if(!$username || !$password) {
@@ -17,12 +26,14 @@ Router::post('/api/auth/register', function (Request $req, Response $res) {
     }
 
     $user_repository = new UserRepository();
-    $user_repository->saveUser(new UserDTO($username, $password));
+    $user_repository->saveUser(new CreateUserRequest($username, $password));
 
     $res->status(HTTP_STATUS::OK)->send();
 });
 
 Router::post('/api/auth/login', function (Request $req, Response $res) {
+
+    $user_repository = new UserRepository();
 
     $username = $req->get_param('username');
     $password = $req->get_param('password');
@@ -32,7 +43,6 @@ Router::post('/api/auth/login', function (Request $req, Response $res) {
         return ;
     }
 
-    $user_repository = new UserRepository();
     $user = $user_repository->getUserByUsername($username);
 
     if (!$user || !password_verify($password, $user->password)) {

@@ -1,6 +1,6 @@
 <?php
 
-class UserDTO {
+class CreateUserRequest {
     public string $username;
     public string $password;
 
