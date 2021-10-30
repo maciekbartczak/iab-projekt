@@ -25,6 +25,12 @@ CREATE TABLE `user_contact` (
     `phone_number` varchar(255) NOT NULL
 );
 
+CREATE TABLE `user_role` (
+    `id` int AUTO_INCREMENT PRIMARY KEY,
+    `user_id` int NOT NULL,
+    `role` enum('user', 'employee', 'admin') NOT NULL
+);
+
 CREATE TABLE `product` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(255) NOT NULL,
@@ -51,19 +57,9 @@ CREATE TABLE `shopping_cart` (
   `total` decimal NOT NULL
 );
 
-CREATE TABLE `employee` (
-  `id` int AUTO_INCREMENT PRIMARY KEY,
-  `username` varchar(255) NOT NULL,
-  `password` text NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `role` enum('admin', 'normal') NOT NULL
-);
-
 CREATE TABLE `order` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
   `user_id` int NOT NULL,
-  `employee_id` int NOT NULL,
   `payment_id` int NOT NULL,
   `status_id` int NOT NULL,
   `placed_at` timestamp NOT NULL
@@ -102,8 +98,6 @@ ALTER TABLE `cart_item` ADD FOREIGN KEY (`cart_id`) REFERENCES `shopping_cart` (
 
 ALTER TABLE `cart_item` ADD FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 
-ALTER TABLE `order` ADD FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`);
-
 ALTER TABLE `order` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 ALTER TABLE `order` ADD FOREIGN KEY (`payment_id`) REFERENCES `payment_details` (`id`);
@@ -117,3 +111,5 @@ ALTER TABLE `order_item` ADD FOREIGN KEY (`order_id`) REFERENCES `order` (`id`);
 ALTER TABLE `product_categories` ADD FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 
 ALTER TABLE `product_categories` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
+
+ALTER TABLE `user_role` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
