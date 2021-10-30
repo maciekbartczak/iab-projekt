@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../lib/Database.php';
 require_once __DIR__ . '/UserDTO.php';
+require_once __DIR__ . '/User.php';
 
 class UserRepository {
     private Database $db;
@@ -32,6 +33,21 @@ class UserRepository {
             $statement->bindParam(':username', $username);
             $statement->execute();
             return $statement->fetchObject('User');
+        } catch (PDOException $e) {
+            var_dump($e);
+        }
+        return null;
+    }
+
+    public function getUserDetailsById(int $id)
+    {
+        try
+        {
+            $query = 'SELECT user.id, username, role FROM user JOIN user_role ur on user.role_id = ur.id WHERE user.id = :id ';
+            $statement = $this->db->prepare($query);
+            $statement->bindParam(':id', $id);
+            $statement->execute();
+            return $statement->fetchObject('UserDetails');
         } catch (PDOException $e) {
             var_dump($e);
         }

@@ -1,8 +1,10 @@
 <?php
 
-require_once __DIR__ . '/../user/User.php';
+require_once __DIR__ . '/../user/UserDetails.php';
 require_once __DIR__ . '/../user/UserRepository.php';
 require_once __DIR__ . '/../user/UserDTO.php';
+require_once __DIR__ . '/../lib/JwtUtils.php';
+
 
 Router::post('/api/auth/register', function (Request $req, Response $res) {
 
@@ -37,7 +39,9 @@ Router::post('/api/auth/login', function (Request $req, Response $res) {
         $res->status(HTTP_STATUS::BAD_REQUEST)->body(['error' => 'invalid-username-or-password'])->send();
         return ;
     }
+    $userDetails = $user_repository->getUserDetailsById($user->id);
+    $jwt = JwtUtils::createJWT($userDetails);
 
-    $res->status(HTTP_STATUS::OK)->body(['message' => 'logged in!'])->send();
+    $res->status(HTTP_STATUS::OK)->body(['token' => $jwt])->send();
 
 });

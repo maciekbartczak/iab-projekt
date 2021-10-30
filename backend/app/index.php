@@ -1,5 +1,5 @@
 <?php
-
+require __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/lib/Router.php';
 require_once __DIR__ . '/lib/Request.php';
 require_once __DIR__ . '/lib/Response.php';
@@ -14,3 +14,4 @@ if (!$GLOBALS['route_matched']) {
     $res = new Response();
     $res->status(HTTP_STATUS::NOT_FOUND)->body(['error' => 'no route found'])->send();
 }
+

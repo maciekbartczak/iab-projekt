@@ -1,3 +1,4 @@
 .idea
 db_diagram.uml
 backend/app/env.php
+backend/app/vendor
