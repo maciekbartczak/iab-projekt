@@ -2,6 +2,7 @@ USE iab;
 
 CREATE TABLE `user` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
+  `role_id` int NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` text NOT NULL
 );
@@ -27,8 +28,7 @@ CREATE TABLE `user_contact` (
 
 CREATE TABLE `user_role` (
     `id` int AUTO_INCREMENT PRIMARY KEY,
-    `user_id` int NOT NULL,
-    `role` enum('user', 'employee', 'admin') NOT NULL
+    `role` enum('USER', 'EMPLOYEE', 'ADMIN') NOT NULL
 );
 
 CREATE TABLE `product` (
@@ -112,4 +112,6 @@ ALTER TABLE `product_categories` ADD FOREIGN KEY (`product_id`) REFERENCES `prod
 
 ALTER TABLE `product_categories` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
 
-ALTER TABLE `user_role` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+ALTER TABLE `user` ADD FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`);
+
+CREATE UNIQUE INDEX user_username_uindex ON user (username);

@@ -50,13 +50,9 @@ class Router
             $params = array_map(function ($param) {
                 return $param[0];
             }, $matches);
+            $GLOBALS['route_matched'] = true;
             $callback(new Request($params), new Response());
         }
-        else {
-            $response = new Response();
-            $response->status(404)->body(["error" => "no route found"])->send();
-        }
-
 
     }
 }
