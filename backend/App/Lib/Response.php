@@ -1,16 +1,22 @@
 <?php
 class Response {
-    private $status = 200;
+    private int $status = 200;
+    private $body;
 
-    public function set_status(int $code) {
+    public function status(int $code) {
         $this->status = $code;
         return $this;
     }
 
-    public function to_json($data = [])
+    public function body($data = []) {
+        $this->body = $data;
+        return $this;
+    }
+
+    public function send()
     {
         http_response_code($this->status);
         header('Content-Type: application/json');
-        echo json_encode($data);
+        echo json_encode($this->body);
     }
 }

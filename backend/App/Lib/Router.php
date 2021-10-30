@@ -38,7 +38,7 @@ class Router
         self::on($route, $callback);
     }
 
-    public static function on($regex, $callback)
+    private static function on($regex, $callback)
     {
         $params = $_SERVER['REQUEST_URI'];
         $params = (stripos($params, "/") !== 0) ? "/" . $params : $params;
@@ -54,10 +54,7 @@ class Router
         }
         else {
             $response = new Response();
-            $response->set_status(404);
-            $response->to_json([
-                "error" => "no route found"
-            ]);
+            $response->status(404)->body(["error" => "no route found"])->send();
         }
 
 
