@@ -5,9 +5,4 @@ export interface LoginDetails {
 
 export interface LoginResponse {
     token: string
-    user: {
-        id: number,
-        role: string,
-        username: string
-    }
 }
