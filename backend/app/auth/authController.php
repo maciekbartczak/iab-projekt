@@ -14,7 +14,7 @@ Router::post('/api/auth/register', function (Request $req, Response $res) {
     $username = $req->get_param('username');
     $user = $user_repository->getUserByUsername($username);
     if ($user) {
-        $res->body(['error' => 'user-exists'])->status(HTTP_STATUS::BAD_REQUEST)->send();
+        $res->body(['error' => 'user-exists'])->status(HTTP_STATUS::UNPROCESSABLE_ENTITY)->send();
         return ;
     }
 
@@ -28,7 +28,7 @@ Router::post('/api/auth/register', function (Request $req, Response $res) {
     $user_repository = new UserRepository();
     $user_repository->saveUser(new CreateUserRequest($username, $password));
 
-    $res->status(HTTP_STATUS::OK)->send();
+    $res->status(HTTP_STATUS::CREATED)->send();
 });
 
 Router::post('/api/auth/login', function (Request $req, Response $res) {
