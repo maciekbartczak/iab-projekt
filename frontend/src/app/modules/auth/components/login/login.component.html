@@ -9,10 +9,10 @@
       </nb-card>
       <form class="login-form" #loginForm="ngForm" (ngSubmit)="login()">
         <input nbInput placeholder="username" type="text" id="username" name="username" required
-               [(ngModel)]="loginRequest.username" #username="ngModel"
+               [(ngModel)]="loginData.username" #username="ngModel"
                [status]="!username.valid && loginForm.submitted ? 'danger' : 'default'">
         <input nbInput placeholder="password" type="password" id="password" name="password" required
-               [(ngModel)]="loginRequest.password" #password="ngModel"
+               [(ngModel)]="loginData.password" #password="ngModel"
                [status]="!password.valid && loginForm.submitted ? 'danger' : 'default'">
         <button nbButton status="primary" type="submit">Login</button>
       </form>

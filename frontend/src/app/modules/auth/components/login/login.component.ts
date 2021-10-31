@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { loginRequest } from '../../models/auth.model';
+import { loginDetails } from '../../models/auth.model';
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -9,17 +10,25 @@ import { loginRequest } from '../../models/auth.model';
 })
 export class LoginComponent{
 
-  public loginRequest: loginRequest = {
+  public loginData: loginDetails = {
     username: '',
     password: ''
   }
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
 
   login() {
-    if (this.loginRequest.username && this.loginRequest.password) {
-
+    if (this.loginData.username && this.loginData.password) {
+      this.authService.login(this.loginData)
+          .subscribe(
+              (res) => {
+                  console.log(`${res}`);
+              },
+              (err) => {
+                  console.log(err);
+              }
+          )
     }
   }
 
