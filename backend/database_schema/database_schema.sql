@@ -4,6 +4,9 @@ CREATE TABLE `user` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
   `role_id` int NOT NULL,
   `username` varchar(255) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `password` text NOT NULL
 );
 
@@ -14,16 +17,8 @@ CREATE TABLE `user_address` (
   `address_line2` varchar(255),
   `city` varchar(255) NOT NULL,
   `postal_code` varchar(255) NOT NULL,
-  `country` varchar(255) NOT NULL
-);
-
-CREATE TABLE `user_contact` (
-    `id` int AUTO_INCREMENT PRIMARY KEY,
-    `user_id` int NOT NULL,
-    `first_name` varchar(255) NOT NULL,
-    `last_name` varchar(255) NOT NULL,
-    `email` varchar(255) NOT NULL,
-    `phone_number` varchar(255) NOT NULL
+  `country` varchar(255) NOT NULL,
+  `phone_number` varchar(255) NOT NULL
 );
 
 CREATE TABLE `user_role` (
@@ -89,8 +84,6 @@ CREATE TABLE `product_categories` (
 );
 
 ALTER TABLE `user_address` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
-
-ALTER TABLE `user_contact` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 ALTER TABLE `shopping_cart` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
