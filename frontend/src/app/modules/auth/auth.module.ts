@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
-import { SignupComponent } from './signup/signup.component';
+import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthComponent } from './auth.component';
 import { NbButtonModule, NbCardModule, NbInputModule, NbLayoutModule, NbSpinnerModule } from "@nebular/theme";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
   declarations: [
-    SignupComponent,
+    RegisterComponent,
     LoginComponent,
     AuthComponent
   ],
@@ -23,7 +23,8 @@ import { FormsModule } from "@angular/forms";
         NbInputModule,
         NbButtonModule,
         FormsModule,
-        NbSpinnerModule
+        NbSpinnerModule,
+        ReactiveFormsModule
     ]
 })
 export class AuthModule { }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { LoginDetails, LoginResponse } from "../models/auth.model";
+import { LoginDetails, LoginResponse, RegisterRequest } from "../models/auth.model";
 import { Observable, ReplaySubject } from "rxjs";
 import { map, shareReplay } from "rxjs/operators";
 import { TokenService } from "./token.service";
@@ -34,6 +34,10 @@ export class AuthService {
                     return response;
                 })
             );
+    }
+
+    public register(registerDetails: RegisterRequest) {
+        return this.http.post('/auth/register', registerDetails);
     }
 
     public logout(): void {

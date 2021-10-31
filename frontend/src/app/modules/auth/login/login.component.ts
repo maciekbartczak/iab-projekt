@@ -41,7 +41,7 @@ export class LoginComponent {
                         if (errorMessage === 'invalid-username-or-password') {
                             this.error = 'Invalid username or password';
                         } else {
-                            this.error = 'Error occurred while logging in!';
+                            this.error = 'Error occurred! Please try again later';
                         }
                         this.loading = false;
                     }

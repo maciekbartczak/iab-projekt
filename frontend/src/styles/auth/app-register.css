@@ -1,0 +1,40 @@
+app-register .register-wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+app-register .register-card {
+    width: 35%;
+    min-width: 340px;
+}
+
+app-register .register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+app-register .register-form > * {
+    margin-top: 10px;
+    min-width: 320px;
+}
+
+app-register .register-header {
+    text-align: center;
+}
+
+app-register .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+app-register .error {
+    min-width: 320px;
+    text-align: center;
+    margin: 0;
+}
+
+
