@@ -15,6 +15,7 @@ services:
       - dbdata:/var/lib/mysql
   backend:
     container_name: iab-backend
+    image: php-apache-iab
     build: './backend/'
     volumes:
       - ./backend/app:/var/www/html
