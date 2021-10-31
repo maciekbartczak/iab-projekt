@@ -1,11 +1,11 @@
 <nb-layout-column class="login-wrapper">
-  <nb-card class="login-card">
+  <nb-card class="login-card" [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="giant">
     <nb-card-header class="login-header">
       <h1>Login</h1>
     </nb-card-header>
     <nb-card-body class="form-wrapper">
-      <nb-card class="error" status="warning">
-        <nb-card-header>Invalid username or password</nb-card-header>
+      <nb-card *ngIf="error" class="error" status="danger">
+        <nb-card-header>{{error}}</nb-card-header>
       </nb-card>
       <form class="login-form" #loginForm="ngForm" (ngSubmit)="login()">
         <input nbInput placeholder="username" type="text" id="username" name="username" required

@@ -1,6 +1,15 @@
 <nb-layout>
 
   <nb-layout-header fixed>
+      <div class="main-header">
+          <div class="navigation">
+              <a nbButton routerLink="/products/list">Products</a>
+          </div>
+          <div class="auth-wrapper">
+              <button nbButton status="primary" *ngIf="!user" routerLink="/auth/login">Login</button>
+              <nb-user *ngIf="user" name={{user.username}} [nbContextMenu]="menuItems" nbContextMenuTag="user-context-menu"></nb-user>
+          </div>
+      </div>
 
   </nb-layout-header>
 
