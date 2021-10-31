@@ -12,6 +12,11 @@ Router::post('/api/auth/register', function (Request $req, Response $res) {
     $user_repository = new UserRepository();
 
     $username = $req->get_param('username');
+    if(!$username) {
+        $res->body(['error' => 'missing-required-params'])->status(HTTP_STATUS::BAD_REQUEST)->send();
+        return ;
+    }
+
     $user = $user_repository->getUserByUsername($username);
     if ($user) {
         $res->body(['error' => 'user-exists'])->status(HTTP_STATUS::UNPROCESSABLE_ENTITY)->send();
@@ -19,14 +24,17 @@ Router::post('/api/auth/register', function (Request $req, Response $res) {
     }
 
     $password = password_hash($req->get_param('password'), PASSWORD_DEFAULT);
+    $first_name = $req->get_param('firstName');
+    $last_name = $req->get_param('lastName');
+    $email = $req->get_param('email');
 
-    if(!$username || !$password) {
+    if(!$password || !$first_name || !$last_name || !$email) {
         $res->body(['error' => 'missing-required-params'])->status(HTTP_STATUS::BAD_REQUEST)->send();
         return ;
     }
 
     $user_repository = new UserRepository();
-    $user_repository->saveUser(new CreateUserRequest($username, $password));
+    $user_repository->saveUser(new CreateUserRequest($username, $password, $first_name, $last_name, $email));
 
     $res->status(HTTP_STATUS::CREATED)->send();
 });

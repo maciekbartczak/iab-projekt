@@ -16,9 +16,13 @@ class UserRepository {
     {
         try
         {
-            $statement = $this->db->prepare('INSERT INTO user (role_id, username, password) VALUES (1, :username, :password)');
+            $statement = $this->db->prepare('INSERT INTO user (role_id, username, password, first_name, last_name, email)
+                VALUES (1, :username, :password, :first_name, :last_name, :email)');
             $statement->bindParam(':username', $createUserRequest->username);
             $statement->bindParam(':password', $createUserRequest->password);
+            $statement->bindParam(':first_name', $createUserRequest->first_name);
+            $statement->bindParam(':last_name', $createUserRequest->last_name);
+            $statement->bindParam(':email', $createUserRequest->email);
             $statement->execute();
         } catch (PDOException $e) {
             var_dump($e);
