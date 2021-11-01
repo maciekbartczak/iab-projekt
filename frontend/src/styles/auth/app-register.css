@@ -16,7 +16,7 @@ app-register .register-form {
     align-items: center;
 }
 
-app-register .register-form > * {
+app-register .register-form > input, button {
     margin-top: 10px;
     min-width: 320px;
 }
@@ -35,6 +35,15 @@ app-register .error {
     min-width: 320px;
     text-align: center;
     margin: 0;
+}
+
+app-register .input-error {
+    min-width: 320px;
+}
+
+app-register .input-error p {
+    color: red;
+    margin: 5px 0 0 0;
 }
 
 

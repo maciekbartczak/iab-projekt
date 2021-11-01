@@ -16,7 +16,7 @@ app-login .login-form {
   align-items: center;
 }
 
-app-login .login-form > * {
+app-login .login-form > input, button {
   margin-top: 10px;
   min-width: 320px;
 }
@@ -35,6 +35,15 @@ app-login .error {
   min-width: 320px;
   text-align: center;
   margin: 0;
+}
+
+app-login .input-error {
+    min-width: 320px;
+}
+
+app-login .input-error p {
+    color: red;
+    margin: 5px 0 0 0;
 }
 
 

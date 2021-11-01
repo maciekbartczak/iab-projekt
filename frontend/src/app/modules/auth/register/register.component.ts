@@ -10,7 +10,7 @@ import { AuthService } from "../../../services/auth.service";
 })
 export class RegisterComponent {
 
-    loginForm: FormGroup;
+    registerForm: FormGroup;
     error = '';
     loading = false;
     submitted = false;
@@ -25,7 +25,7 @@ export class RegisterComponent {
 
     constructor(private authService: AuthService,
                 private formBuilder: FormBuilder) {
-        this.loginForm = this.formBuilder.group({
+        this.registerForm = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
             firstName: ['', Validators.required],
@@ -37,11 +37,12 @@ export class RegisterComponent {
 
     register(): void {
         this.submitted = true;
-        this.loading = true;
 
-        if (this.loginForm.invalid) {
+        if (this.registerForm.invalid) {
             return;
         }
+
+        this.loading = true;
 
         this.authService.register(this.model).subscribe(
             () => {
