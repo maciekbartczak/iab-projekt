@@ -1,0 +1,49 @@
+app-login .login-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+app-login .login-card {
+  width: 35%;
+  min-width: 340px;
+}
+
+app-login .login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+app-login .login-form > input, button {
+  margin-top: 10px;
+  min-width: 320px;
+}
+
+app-login .login-header {
+  text-align: center;
+}
+
+app-login .form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+app-login .error {
+  min-width: 320px;
+  text-align: center;
+  margin: 0;
+}
+
+app-login .input-error {
+    min-width: 320px;
+}
+
+app-login .input-error p {
+    color: red;
+    margin: 5px 0 0 0;
+}
+
+

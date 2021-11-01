@@ -1,0 +1,31 @@
+<nb-layout-column class="login-wrapper">
+    <nb-card class="login-card" [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="giant">
+        <nb-card-header class="login-header">
+            <h1>Login</h1>
+        </nb-card-header>
+        <nb-card-body class="form-wrapper">
+            <nb-card *ngIf="error" class="error" status="danger">
+                <nb-card-header>{{error}}</nb-card-header>
+            </nb-card>
+            <form class="login-form" #loginForm="ngForm" (ngSubmit)="login()">
+                <input nbInput placeholder="username" type="text" id="username" name="username" required
+                       [(ngModel)]="loginData.username" #username="ngModel"
+                       [status]="!username.valid && loginForm.submitted ? 'danger' : 'default'">
+                <div *ngIf="loginForm.submitted && !username.valid" class="input-error">
+                    <p>Username is required!</p>
+                </div>
+
+                <input nbInput placeholder="password" type="password" id="password" name="password" required
+                       [(ngModel)]="loginData.password" #password="ngModel"
+                       [status]="!password.valid && loginForm.submitted ? 'danger' : 'default'">
+                <div *ngIf="loginForm.submitted && !password.valid" class="input-error">
+                    <p>Password is required!</p>
+                </div>
+
+                <button nbButton status="primary" type="submit">Login</button>
+            </form>
+        </nb-card-body>
+    </nb-card>
+</nb-layout-column>
+
+
