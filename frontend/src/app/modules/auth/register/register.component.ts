@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { RegisterRequest } from "../../../models/auth.model";
 import { AuthService } from "../../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-register',
@@ -24,7 +25,8 @@ export class RegisterComponent {
     };
 
     constructor(private authService: AuthService,
-                private formBuilder: FormBuilder) {
+                private formBuilder: FormBuilder,
+                private router: Router) {
         this.registerForm = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
@@ -46,7 +48,16 @@ export class RegisterComponent {
 
         this.authService.register(this.model).subscribe(
             () => {
-                console.log('success');
+                this.authService.login({username: this.model.username, password: this.model.password})
+                    .subscribe(
+                        () => {
+                            this.router.navigate(['/']);
+                        },
+                        () => {
+                            this.error = 'Registration was successfull but we couldn\'t log you in. Please log in manually';
+                            this.loading = false;
+                        }
+                    )
                 this.loading = false;
             },
             (err) => {
