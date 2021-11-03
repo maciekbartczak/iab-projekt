@@ -1,6 +1,6 @@
 USE iab;
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
   `role_id` int NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE `user` (
   `password` text NOT NULL
 );
 
-CREATE TABLE `user_address` (
+CREATE TABLE IF NOT EXISTS `user_address` (
   `id` int PRIMARY KEY,
   `user_id` int NOT NULL,
   `address_line1` varchar(255) NOT NULL,
@@ -21,38 +21,38 @@ CREATE TABLE `user_address` (
   `phone_number` varchar(255) NOT NULL
 );
 
-CREATE TABLE `user_role` (
+CREATE TABLE IF NOT EXISTS `user_role` (
     `id` int AUTO_INCREMENT PRIMARY KEY,
     `role` enum('USER', 'EMPLOYEE', 'ADMIN') NOT NULL
 );
 
-CREATE TABLE `product` (
+CREATE TABLE IF NOT EXISTS `product` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `price` decimal NOT NULL
 );
 
-CREATE TABLE `category` (
+CREATE TABLE IF NOT EXISTS `category` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL
 );
 
-CREATE TABLE `cart_item` (
+CREATE TABLE IF NOT EXISTS `cart_item` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
   `cart_id` int NOT NULL,
   `product_id` int NOT NULL,
   `quantity` int NOT NULL
 );
 
-CREATE TABLE `shopping_cart` (
+CREATE TABLE IF NOT EXISTS `shopping_cart` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
   `user_id` int NOT NULL,
   `total` decimal NOT NULL
 );
 
-CREATE TABLE `order` (
+CREATE TABLE IF NOT EXISTS `order` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
   `user_id` int NOT NULL,
   `payment_id` int NOT NULL,
@@ -60,25 +60,25 @@ CREATE TABLE `order` (
   `placed_at` timestamp NOT NULL
 );
 
-CREATE TABLE `order_item` (
+CREATE TABLE IF NOT EXISTS `order_item` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
   `order_id` int NOT NULL,
   `product_id` int NOT NULL,
   `quantity` int NOT NULL
 );
 
-CREATE TABLE `payment_details` (
+CREATE TABLE IF NOT EXISTS `payment_details` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
   `payment_type` enum('transfer') NOT NULL,
   `status` enum('in_progress', 'finished') NOT NULL
 );
 
-CREATE TABLE `status_details` (
+CREATE TABLE IF NOT EXISTS `status_details` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
   `status` enum('new', 'in_shipping', 'finished') NOT NULL
 );
 
-CREATE TABLE `product_categories` (
+CREATE TABLE IF NOT EXISTS `product_categories` (
   `product_id` int NOT NULL,
   `category_id` int NOT NULL
 );
@@ -108,3 +108,14 @@ ALTER TABLE `product_categories` ADD FOREIGN KEY (`category_id`) REFERENCES `cat
 ALTER TABLE `user` ADD FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`);
 
 CREATE UNIQUE INDEX user_username_uindex ON user (username);
+
+INSERT INTO user_role (role) VALUE ('USER');
+INSERT INTO user_role (role) VALUE ('EMPLOYEE');
+INSERT INTO user_role (role) VALUE ('ADMIN');
+
+INSERT INTO user (role_id, username, password, first_name, last_name, email)
+VALUES (1, 'teryD', '$2y$10$WBkYKnXORMVXb5NbYN/A1uFbAqPdwJEv5LIjhtpo3VrJiRd3zPfge', 'Terry', 'Derek', 'terryderek@mail.com');
+INSERT INTO user (role_id, username, password, first_name, last_name, email)
+VALUES (2, 'adam', '$2y$10$PCKDQbsLPumY9Ri0SShrxuLD09cT0T4D6OiaPSTFgjS6VFTiQ488C', 'Adam', 'Sanchez', 'asanchez@mail.com');
+INSERT INTO user (role_id, username, password, first_name, last_name, email)
+VALUES (3, 'admin', '$2y$10$ZS4jxTbECMfE.9Cz9QLLiO9ANM87enbtpKRvLiGa6RWx6DxwdAzI6', 'Rick', 'Sanchez', 'rick@sanchez.com');
