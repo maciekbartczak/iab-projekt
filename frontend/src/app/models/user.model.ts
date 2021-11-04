@@ -3,3 +3,10 @@ export interface User {
     role: string,
     username: string
 }
+
+export interface UserProfileResponse {
+    username: string,
+    firstName: string,
+    lastName: string,
+    email: string
+}

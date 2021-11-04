@@ -6,8 +6,10 @@
               <a nbButton routerLink="/products/list">Products</a>
           </div>
           <div class="auth-wrapper">
-              <a nbButton *ngIf="!user" outline status="primary" routerLink="/auth/login" class="login-button">Login</a>
-              <a nbButton *ngIf="!user" status="primary"  routerLink="/auth/register">Register</a>
+              <div class="auth-links" *ngIf="!user">
+                  <a nbButton outline status="primary" routerLink="/auth/login" class="login-button">Login</a>
+                  <a nbButton status="primary"  routerLink="/auth/register">Register</a>
+              </div>
               <nb-user *ngIf="user" name={{user.username}} [nbContextMenu]="menuItems" nbContextMenuTag="user-context-menu"></nb-user>
           </div>
       </div>
