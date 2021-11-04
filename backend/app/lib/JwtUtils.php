@@ -24,4 +24,17 @@ class JwtUtils {
 
         return JWT::encode($data, $secretKey);
     }
+
+    private static function getJWT(): string
+    {
+        return str_replace('Bearer ', '', $_SERVER['HTTP_AUTHORIZATION']);
+    }
+
+    public static function getDecodedJWT() {
+        global $env;
+
+        $token = self::getJWT();
+        return JWT::decode($token, $env['jwt_secret'], array('HS256'));
+    }
+
 }

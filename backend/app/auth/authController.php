@@ -37,6 +37,7 @@ Router::post('/api/auth/register', function (Request $req, Response $res) {
     $user_repository->saveUser(new CreateUserRequest($username, $password, $first_name, $last_name, $email));
 
     $res->status(HTTP_STATUS::CREATED)->send();
+
 });
 
 Router::post('/api/auth/login', function (Request $req, Response $res) {
@@ -61,5 +62,4 @@ Router::post('/api/auth/login', function (Request $req, Response $res) {
     $jwt = JwtUtils::createJWT($userDetails);
 
     $res->status(HTTP_STATUS::OK)->body(['token' => $jwt])->send();
-
 });
