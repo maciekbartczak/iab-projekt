@@ -3,8 +3,10 @@
 require_once __DIR__ . '/../lib/Database.php';
 require_once __DIR__ . '/CreateUserRequest.php';
 require_once __DIR__ . '/User.php';
+require_once __DIR__ . '/UserProfile.php';
 
-class UserRepository {
+
+class UserService {
     private Database $db;
 
     public function __construct()
@@ -59,6 +61,26 @@ class UserRepository {
             if($userDetails)
             {
                 return $userDetails;
+            }
+        } catch (PDOException $e)
+        {
+            var_dump($e);
+        }
+        return null;
+    }
+
+    public function getUserProfileById(int $id): ?UserProfile
+    {
+        try
+        {
+            $query = 'SELECT username, first_name, last_name, email FROM user WHERE user.id = :id';
+            $statement = $this->db->prepare($query);
+            $statement->bindParam(':id', $id);
+            $statement->execute();
+            $user_profile = $statement->fetchObject('UserProfile');
+            if($user_profile)
+            {
+                return $user_profile;
             }
         } catch (PDOException $e)
         {
