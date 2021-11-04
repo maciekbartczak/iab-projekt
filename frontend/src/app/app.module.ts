@@ -15,6 +15,8 @@ import {
 import { environment } from "../environments/environment";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { APIInterceptor } from "./interceptors/api.interceptor";
+import { AuthInterceptor } from "./interceptors/auth.interceptor";
+import { JWT_OPTIONS, JwtHelperService } from "@auth0/angular-jwt";
 
 @NgModule({
     declarations: [
@@ -34,12 +36,19 @@ import { APIInterceptor } from "./interceptors/api.interceptor";
     ],
     providers: [
         {provide: "API_URL", useValue: environment.apiUrl},
+        {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
         {
             provide: HTTP_INTERCEPTORS,
             useClass: APIInterceptor,
             multi: true
         },
-        NbMenuService
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true,
+        },
+        NbMenuService,
+        JwtHelperService
     ],
     bootstrap: [AppComponent]
 })

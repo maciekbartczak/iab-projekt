@@ -16,8 +16,9 @@ export class TokenService {
         localStorage.setItem(TOKEN_STORAGE_KEY, token);
     }
 
-    private getToken(): string | null {
-        return localStorage.getItem(TOKEN_STORAGE_KEY);
+    public getToken(): string {
+        const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+        return token == null ? '' : token;
     }
 
     public removeToken(): void {

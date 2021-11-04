@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
 
     private logout(): void {
         this.authService.logout();
-        window.location.reload();
+        this.router.navigate(['/']);
     }
 
 

@@ -15,7 +15,6 @@ export class APIInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const apiReq = request.clone({url: `${this.apiUrl}${request.url}`});
-        console.log(apiReq.url);
         return next.handle(apiReq);
     }
 }
