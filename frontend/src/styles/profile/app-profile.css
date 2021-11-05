@@ -1,0 +1,22 @@
+app-profile .profile-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+app-profile .profile-card {
+    width: 70%;
+}
+
+app-profile .profile-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+app-profile .profile-details > * {
+    margin-top: 10px;
+}

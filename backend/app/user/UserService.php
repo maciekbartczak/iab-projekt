@@ -73,7 +73,7 @@ class UserService {
     {
         try
         {
-            $query = 'SELECT username, first_name, last_name, email FROM user WHERE user.id = :id';
+            $query = 'SELECT username, first_name AS firstName, last_name as lastName, email FROM user WHERE user.id = :id';
             $statement = $this->db->prepare($query);
             $statement->bindParam(':id', $id);
             $statement->execute();

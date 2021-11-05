@@ -1,2 +1,13 @@
-<h1>hello {{userId}}</h1>
-<p>{{userProfile | json}}</p>
+<nb-layout-column class="profile-wrapper">
+    <nb-card class="profile-card">
+        <nb-card-header>
+            <h1>hello {{userId}}</h1>
+        </nb-card-header>
+        <nb-card-body class="profile-details" *ngIf="userProfile">
+            <input nbInput [disabled]="true" [(ngModel)]="userProfile.username">
+            <input nbInput [disabled]="true" [(ngModel)]="userProfile.firstName">
+            <input nbInput [disabled]="true" [(ngModel)]="userProfile.lastName">
+            <input nbInput [disabled]="true" [(ngModel)]="userProfile.email">
+        </nb-card-body>
+    </nb-card>
+</nb-layout-column>
