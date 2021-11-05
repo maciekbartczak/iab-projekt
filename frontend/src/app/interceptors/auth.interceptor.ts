@@ -9,11 +9,13 @@ import { Observable, of, throwError } from 'rxjs';
 import { TokenService } from "../services/token.service";
 import { catchError } from "rxjs/operators";
 import { Router } from "@angular/router";
+import {AuthService} from "../services/auth.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
     constructor(private tokenService: TokenService,
+                private authService: AuthService,
                 private router: Router) {
     }
 
@@ -31,6 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
     private handleAuthError(err: HttpErrorResponse): Observable<any> {
 
         if (err.status === 401) {
+            this.authService.logout();
             this.router.navigate(['/auth/login']);
             return of(err.message);
         }
