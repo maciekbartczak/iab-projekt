@@ -18,7 +18,7 @@ class UserService {
     {
         try
         {
-            $statement = $this->db->prepare('INSERT INTO user (role_id, username, password, first_name, last_name, email)
+            $statement = $this->db->prepare('INSERT INTO User (roleId, username, password, firstName, lastName, email)
                 VALUES (1, :username, :password, :first_name, :last_name, :email)');
             $statement->bindParam(':username', $createUserRequest->username);
             $statement->bindParam(':password', $createUserRequest->password);
@@ -35,7 +35,7 @@ class UserService {
     {
         try
         {
-            $statement = $this->db->prepare('SELECT * FROM user WHERE username = :username');
+            $statement = $this->db->prepare('SELECT * FROM User WHERE username = :username');
             $statement->bindParam(':username', $username);
             $statement->execute();
             $user = $statement->fetchObject('User');
@@ -53,7 +53,7 @@ class UserService {
     {
         try
         {
-            $query = 'SELECT user.id, username, role FROM user JOIN user_role ur on user.role_id = ur.id WHERE user.id = :id ';
+            $query = 'SELECT User.id, username, role FROM User JOIN UserRole ur on User.roleId = ur.id WHERE User.id = :id ';
             $statement = $this->db->prepare($query);
             $statement->bindParam(':id', $id);
             $statement->execute();
@@ -73,7 +73,7 @@ class UserService {
     {
         try
         {
-            $query = 'SELECT username, first_name AS firstName, last_name as lastName, email FROM user WHERE user.id = :id';
+            $query = 'SELECT username, firstName, lastName as lastName, email FROM User WHERE User.id = :id';
             $statement = $this->db->prepare($query);
             $statement->bindParam(':id', $id);
             $statement->execute();
