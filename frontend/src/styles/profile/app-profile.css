@@ -7,7 +7,7 @@ app-profile .profile-wrapper {
 }
 
 app-profile .profile-card {
-    width: 70%;
+    width: 50%;
 }
 
 app-profile .profile-details {
@@ -19,4 +19,17 @@ app-profile .profile-details {
 
 app-profile .profile-details > * {
     margin-top: 10px;
+}
+
+app-profile .detail-showcase {
+    display: flex;
+    flex-direction: column;
+}
+
+app-profile .detail-showcase:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+app-profile .info-wrapper {
+    padding: 0;
 }

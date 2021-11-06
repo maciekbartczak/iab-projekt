@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
 import { ProfileComponent } from './profile/profile.component';
-import {NbCardModule, NbInputModule, NbLayoutModule} from "@nebular/theme";
+import { NbAccordionModule, NbCardModule, NbInputModule, NbLayoutModule } from "@nebular/theme";
 import {FormsModule} from "@angular/forms";
 
 
@@ -17,7 +17,8 @@ import {FormsModule} from "@angular/forms";
         NbLayoutModule,
         NbCardModule,
         NbInputModule,
-        FormsModule
+        FormsModule,
+        NbAccordionModule
     ]
 })
 export class UserModule { }
