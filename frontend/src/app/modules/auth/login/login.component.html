@@ -4,9 +4,9 @@
             <h1>Login</h1>
         </nb-card-header>
         <nb-card-body class="form-wrapper">
-            <nb-card *ngIf="error" class="error" status="danger">
-                <nb-card-header>{{error}}</nb-card-header>
-            </nb-card>
+            <nb-alert *ngIf="error" status="danger" class="error">
+                {{error}}
+            </nb-alert>
             <form class="login-form" #loginForm="ngForm" (ngSubmit)="login()">
                 <input nbInput placeholder="username" type="text" id="username" name="username" required
                        [(ngModel)]="loginData.username" #username="ngModel"
