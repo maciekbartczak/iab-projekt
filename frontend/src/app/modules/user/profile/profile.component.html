@@ -1,9 +1,9 @@
 <nb-layout-column class="profile-wrapper">
-    <nb-card class="profile-card">
+    <nb-card class="profile-card" *ngIf="userProfile">
         <nb-card-header>
             <h1>hello {{userId}}</h1>
         </nb-card-header>
-        <nb-card-body class="profile-details" *ngIf="userProfile">
+        <nb-card-body class="profile-details">
             <input nbInput [disabled]="true" [(ngModel)]="userProfile.username">
             <input nbInput [disabled]="true" [(ngModel)]="userProfile.firstName">
             <input nbInput [disabled]="true" [(ngModel)]="userProfile.lastName">

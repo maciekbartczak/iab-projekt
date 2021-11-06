@@ -11,7 +11,7 @@ class JwtUtils {
 
         $secretKey  = $env['jwt_secret'];
         $issuedAt   = new DateTimeImmutable();
-        $expire     = $issuedAt->modify('+6 minutes')->getTimestamp();
+        $expire     = $issuedAt->modify('+60 minutes')->getTimestamp();
         $serverName = "localhost";
 
         $data = [
