@@ -3,8 +3,10 @@
 require_once __DIR__ . '/../lib/Database.php';
 require_once __DIR__ . '/CreateUserRequest.php';
 require_once __DIR__ . '/User.php';
+require_once __DIR__ . '/UserProfile.php';
 
-class UserRepository {
+
+class UserService {
     private Database $db;
 
     public function __construct()
@@ -16,7 +18,7 @@ class UserRepository {
     {
         try
         {
-            $statement = $this->db->prepare('INSERT INTO user (role_id, username, password, first_name, last_name, email)
+            $statement = $this->db->prepare('INSERT INTO User (roleId, username, password, firstName, lastName, email)
                 VALUES (1, :username, :password, :first_name, :last_name, :email)');
             $statement->bindParam(':username', $createUserRequest->username);
             $statement->bindParam(':password', $createUserRequest->password);
@@ -33,7 +35,7 @@ class UserRepository {
     {
         try
         {
-            $statement = $this->db->prepare('SELECT * FROM user WHERE username = :username');
+            $statement = $this->db->prepare('SELECT * FROM User WHERE username = :username');
             $statement->bindParam(':username', $username);
             $statement->execute();
             $user = $statement->fetchObject('User');
@@ -51,7 +53,7 @@ class UserRepository {
     {
         try
         {
-            $query = 'SELECT user.id, username, role FROM user JOIN user_role ur on user.role_id = ur.id WHERE user.id = :id ';
+            $query = 'SELECT User.id, username, role FROM User JOIN UserRole ur on User.roleId = ur.id WHERE User.id = :id ';
             $statement = $this->db->prepare($query);
             $statement->bindParam(':id', $id);
             $statement->execute();
@@ -59,6 +61,26 @@ class UserRepository {
             if($userDetails)
             {
                 return $userDetails;
+            }
+        } catch (PDOException $e)
+        {
+            var_dump($e);
+        }
+        return null;
+    }
+
+    public function getUserProfileById(int $id): ?UserProfile
+    {
+        try
+        {
+            $query = 'SELECT username, firstName, lastName as lastName, email FROM User WHERE User.id = :id';
+            $statement = $this->db->prepare($query);
+            $statement->bindParam(':id', $id);
+            $statement->execute();
+            $user_profile = $statement->fetchObject('UserProfile');
+            if($user_profile)
+            {
+                return $user_profile;
             }
         } catch (PDOException $e)
         {

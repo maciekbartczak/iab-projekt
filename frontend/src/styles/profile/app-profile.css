@@ -1,0 +1,35 @@
+app-profile .profile-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+app-profile .profile-card {
+    width: 50%;
+}
+
+app-profile .profile-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+app-profile .profile-details > * {
+    margin-top: 10px;
+}
+
+app-profile .detail-showcase {
+    display: flex;
+    flex-direction: column;
+}
+
+app-profile .detail-showcase:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+app-profile .info-wrapper {
+    padding: 0;
+}

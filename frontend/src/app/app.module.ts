@@ -10,15 +10,19 @@ import {
     NbButtonModule,
     NbUserModule,
     NbContextMenuModule,
-    NbMenuService, NbMenuModule,
+    NbMenuService, NbMenuModule, NbToastrModule,
 } from '@nebular/theme';
 import { environment } from "../environments/environment";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { APIInterceptor } from "./interceptors/api.interceptor";
+import { AuthInterceptor } from "./interceptors/auth.interceptor";
+import { JWT_OPTIONS, JwtHelperService } from "@auth0/angular-jwt";
+import { NotFoundComponent } from './common/not-found/not-found.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        NotFoundComponent
     ],
     imports: [
         BrowserModule,
@@ -30,16 +34,24 @@ import { APIInterceptor } from "./interceptors/api.interceptor";
         NbButtonModule,
         NbUserModule,
         NbMenuModule.forRoot(),
-        NbContextMenuModule
+        NbContextMenuModule,
+        NbToastrModule.forRoot(),
     ],
     providers: [
         {provide: "API_URL", useValue: environment.apiUrl},
+        {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
         {
             provide: HTTP_INTERCEPTORS,
             useClass: APIInterceptor,
             multi: true
         },
-        NbMenuService
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true,
+        },
+        NbMenuService,
+        JwtHelperService
     ],
     bootstrap: [AppComponent]
 })

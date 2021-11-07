@@ -14,13 +14,8 @@ export class AppComponent implements OnInit {
     title = 'frontend';
     public user?: User;
     menuItems = [
-        {title: 'Profile',},
-        {
-            title: 'Logout',
-            data: {
-                action: this.logout
-            }
-        }
+        {title: 'Profile'},
+        {title: 'Logout'}
     ];
 
     constructor(public authService: AuthService,
@@ -37,19 +32,26 @@ export class AppComponent implements OnInit {
         this.nbMenuService.onItemClick()
             .pipe(
                 filter(({tag}) => tag === 'user-context-menu'),
-                map(({item}) => item),
+                map(({item}) => item.title),
             )
-            .subscribe(item => {
-                const title = item.title;
-                if (title === 'Logout') {
-                    this.logout();
+            .subscribe(title => {
+                switch (title) {
+                    case 'Profile':
+                        this.router.navigate([`/user/${this.user?.id}/profile`])
+                        break;
+                    case 'Logout':
+                        this.logout();
+                        break;
+                    default:
+                        break;
                 }
+
             });
     }
 
     private logout(): void {
         this.authService.logout();
-        window.location.reload();
+        this.router.navigate(['/']);
     }
 
 
