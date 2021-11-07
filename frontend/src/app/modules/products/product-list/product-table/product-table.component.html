@@ -1,10 +1,28 @@
 <div class="product-table-wrapper">
-    <nb-card *ngFor="let product of products" class="product-card">
-        <nb-card-header class="product-header">
-            {{product.name}}
-        </nb-card-header>
-        <nb-card-body class="product-body">
-            <img src="{{'http://localhost:8000/' + product.imageUrl}}" alt="{{product.name}}" class="product-image">
-        </nb-card-body>
-    </nb-card>
+    <nb-reveal-card *ngFor="let product of products" class="product-card">
+        <nb-card-front>
+            <nb-card>
+                <nb-card-header class="product-header">
+                    {{product.name}}
+                </nb-card-header>
+                <nb-card-body class="product-body">
+                    <img src="{{'http://localhost:8000/' + product.imageUrl}}" alt="{{product.name}}" class="product-image">
+                    <div class="price-cart-wrapper">
+                        <h6 class="product-price">{{product.price}} PLN</h6>
+                        <button nbButton status="success" class="cart-button">Add to cart</button>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </nb-card-front>
+        <nb-card-back class="description-card-wrapper">
+            <nb-card class="description-card">
+                <nb-card-header>
+                    Description
+                </nb-card-header>
+                <nb-card-body>
+                    Macbook
+                </nb-card-body>
+            </nb-card>
+        </nb-card-back>
+    </nb-reveal-card>
 </div>

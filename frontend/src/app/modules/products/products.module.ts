@@ -4,7 +4,7 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductTableComponent } from './product-list/product-table/product-table.component';
-import { NbCardModule, NbLayoutModule } from "@nebular/theme";
+import { NbButtonModule, NbCardModule, NbLayoutModule } from "@nebular/theme";
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import { NbCardModule, NbLayoutModule } from "@nebular/theme";
         CommonModule,
         ProductsRoutingModule,
         NbLayoutModule,
-        NbCardModule
+        NbCardModule,
+        NbButtonModule
     ]
 })
 export class ProductsModule { }

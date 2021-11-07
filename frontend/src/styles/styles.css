@@ -1,7 +1,6 @@
 @import "auth/app-login.css";
 @import "auth/app-register.css";
 @import "profile/app-profile.css";
-@import "product/app-product-list.css";
 @import "product/app-product-table.css";
 
 * {
