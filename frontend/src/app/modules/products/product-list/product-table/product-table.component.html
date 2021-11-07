@@ -1,0 +1,10 @@
+<div class="product-table-wrapper">
+    <nb-card *ngFor="let product of products" class="product-card">
+        <nb-card-header class="product-header">
+            {{product.name}}
+        </nb-card-header>
+        <nb-card-body class="product-body">
+            <img src="{{'http://localhost:8000/' + product.imageUrl}}" alt="{{product.name}}" class="product-image">
+        </nb-card-body>
+    </nb-card>
+</div>

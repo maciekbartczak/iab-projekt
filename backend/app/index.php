@@ -10,6 +10,7 @@ $GLOBALS['route_matched'] = false;
 
 require_once __DIR__ . '/auth/authController.php';
 require_once __DIR__ . '/user/userController.php';
+require_once __DIR__ . '/product/productController.php';
 
 if (!$GLOBALS['route_matched']) {
     $res = new Response();

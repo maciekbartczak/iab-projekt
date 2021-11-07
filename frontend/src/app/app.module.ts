@@ -38,7 +38,7 @@ import { NotFoundComponent } from './common/not-found/not-found.component';
         NbToastrModule.forRoot(),
     ],
     providers: [
-        {provide: "API_URL", useValue: environment.apiUrl},
+        {provide: "BASE_URL", useValue: environment.baseUrl},
         {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
         {
             provide: HTTP_INTERCEPTORS,

@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductTableComponent } from './product-list/product-table/product-table.component';
+import { NbCardModule, NbLayoutModule } from "@nebular/theme";
 
 
 @NgModule({
   declarations: [
-    ProductsComponent
+    ProductsComponent,
+    ProductListComponent,
+    ProductTableComponent
   ],
-  imports: [
-    CommonModule,
-    ProductsRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        ProductsRoutingModule,
+        NbLayoutModule,
+        NbCardModule
+    ]
 })
 export class ProductsModule { }
