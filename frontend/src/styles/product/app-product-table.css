@@ -7,13 +7,15 @@ app-product-table .product-table-wrapper {
 }
 
 app-product-table .product-image {
-    width: auto;
-    max-height: 250px;
+    height: auto;
+    min-width: 250px;
+    width: 100%;
 }
 
 app-product-table .product-card {
     flex-basis: 30%;
     margin-right: 2rem;
+    min-width: 300px;
 }
 
 app-product-table .product-body {
