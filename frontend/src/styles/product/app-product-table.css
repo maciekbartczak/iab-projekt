@@ -14,7 +14,6 @@ app-product-table .product-image {
 
 app-product-table .product-card {
     flex-basis: 30%;
-    margin-right: 2rem;
     min-width: 300px;
 }
 

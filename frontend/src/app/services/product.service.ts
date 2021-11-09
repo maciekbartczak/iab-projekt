@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from "../models/product.model";
+import {Product, ProductsPagesRequest, ProductsPagesResponse} from "../models/product.model";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 
@@ -13,6 +13,10 @@ export class ProductService {
 
     public getAll(): Observable<Product[]> {
         return this.http.get<Product[]>('api/products');
+    }
+
+    public getProductsPage(productPagesRequest: ProductsPagesRequest): Observable<ProductsPagesResponse> {
+        return this.http.post<ProductsPagesResponse>('api/products/pages', productPagesRequest);
     }
 
 }

@@ -10,14 +10,28 @@ import { Product } from "../../../models/product.model";
 export class ProductListComponent implements OnInit {
 
     products?: Product[];
+    pageNumber = 1;
+    productsPerPage = 3;
+    totalPages?: number;
 
     constructor(private productService: ProductService) {
     }
 
     ngOnInit(): void {
-        this.productService.getAll().subscribe(
-            (products) => this.products = products
-        );
+       this.fetchPage();
     }
 
+    pageChange(offset: number): void {
+        this.pageNumber += offset;
+        this.fetchPage();
+    }
+
+    fetchPage(): void {
+        this.productService.getProductsPage({pageNumber: this.pageNumber, productsPerPage: this.productsPerPage}).subscribe(
+            (res) => {
+                this.products = res.items;
+                this.totalPages = res.totalPages;
+            }
+        );
+    }
 }
