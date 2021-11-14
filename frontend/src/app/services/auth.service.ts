@@ -24,7 +24,7 @@ export class AuthService {
     }
 
     public login(loginDetails: LoginDetails): Observable<LoginResponse> {
-        return this.http.post<LoginResponse>('/auth/login', loginDetails)
+        return this.http.post<LoginResponse>('api/auth/login', loginDetails)
             .pipe(
                 shareReplay(),
                 map(response => {
@@ -37,7 +37,7 @@ export class AuthService {
     }
 
     public register(registerDetails: RegisterRequest) {
-        return this.http.post('/auth/register', registerDetails);
+        return this.http.post('api/auth/register', registerDetails);
     }
 
     public logout(): void {

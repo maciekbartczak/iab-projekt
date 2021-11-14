@@ -1,20 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-products',
-  template: `
-    <p>
-      products works!
-    </p>
-  `,
-  styles: [
-  ]
+    selector: 'app-products',
+    template: '<router-outlet></router-outlet>'
 })
 export class ProductsComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 }
