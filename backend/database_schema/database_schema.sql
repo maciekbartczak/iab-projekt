@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `User` (
 );
 
 CREATE TABLE IF NOT EXISTS `UserAddress` (
-  `id` int PRIMARY KEY,
+  `id` int AUTO_INCREMENT PRIMARY KEY,
   `UserId` int NOT NULL,
   `addressLine1` varchar(255) NOT NULL,
   `addressLine2` varchar(255),
