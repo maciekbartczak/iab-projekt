@@ -12,7 +12,7 @@ export class UserService {
     }
 
     public getUserProfile(userId: string): Observable<UserProfileResponse> {
-        return this.http.get<UserProfileResponse>(`/user/${userId}/profile`);
+        return this.http.get<UserProfileResponse>(`api/user/${userId}/profile`);
     }
 
 }

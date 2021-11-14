@@ -120,3 +120,18 @@ INSERT INTO User (roleId, username, password, firstName, lastName, email)
 VALUES (2, 'adam', '$2y$10$PCKDQbsLPumY9Ri0SShrxuLD09cT0T4D6OiaPSTFgjS6VFTiQ488C', 'Adam', 'Sanchez', 'asanchez@mail.com');
 INSERT INTO User (roleId, username, password, firstName, lastName, email)
 VALUES (3, 'admin', '$2y$10$ZS4jxTbECMfE.9Cz9QLLiO9ANM87enbtpKRvLiGa6RWx6DxwdAzI6', 'Rick', 'Sanchez', 'rick@sanchez.com');
+
+INSERT INTO Category (id, name, description) VALUES (1, 'Notebook', 'Description');
+
+INSERT INTO Product (id, name, description, price, imageUrl) VALUES (1, 'Apple MacBook Air M1/8GB/256/Mac OS Space Gray', '', 4600, 'product_images/macbook-air-space-gray.jpg');
+INSERT INTO ProductCategories VALUES (1, 1);
+
+INSERT INTO Product (id, name, description, price, imageUrl) VALUES (2, 'Apple MacBook Air M1/16GB/256/Mac OS Gold', '', 5800, 'product_images/macbook-air-gold.png');
+INSERT INTO ProductCategories VALUES (2, 1);
+
+INSERT INTO Product (id, name, description, price, imageUrl) VALUES (3, 'Apple MacBook Pro M1/16GB/512/Mac OS Silver', '', 8200, 'product_images/macbook-pro-silver.png');
+INSERT INTO ProductCategories VALUES (3, 1);
+
+INSERT INTO Product (id, name, description, price, imageUrl) VALUES (4, 'Apple MacBook Pro M1/16GB/256/Mac OS Space Gray', '', 7100, 'product_images/macbook-pro-space-gray.png');
+INSERT INTO ProductCategories VALUES (4, 1);
+

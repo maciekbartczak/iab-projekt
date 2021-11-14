@@ -28,7 +28,7 @@ class UserService {
             $statement->bindParam(':email', $createUserRequest->email);
             $statement->execute();
         } catch (PDOException $e) {
-            var_dump($e);
+            exit($e);
         }
     }
 
@@ -45,7 +45,7 @@ class UserService {
             }
         } catch (PDOException $e)
         {
-            var_dump($e);
+            exit($e);
         }
         return null;
     }
@@ -65,7 +65,7 @@ class UserService {
             }
         } catch (PDOException $e)
         {
-            var_dump($e);
+            exit($e);
         }
         return null;
     }
@@ -85,7 +85,7 @@ class UserService {
             }
         } catch (PDOException $e)
         {
-            var_dump($e);
+            exit($e);
         }
         return null;
     }

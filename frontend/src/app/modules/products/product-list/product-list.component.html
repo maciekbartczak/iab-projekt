@@ -1,0 +1,7 @@
+<nb-layout-column class="product-list-wrapper">
+    <app-product-table [products]="products"></app-product-table>
+    <div class="pagination">
+        <button nbButton outline status="primary" [disabled]="pageNumber === 1" (click)="pageChange(-1)">< Previous</button>
+        <button nbButton outline status="primary" [disabled]="pageNumber === totalPages" (click)="pageChange(1)">Next ></button>
+    </div>
+</nb-layout-column>

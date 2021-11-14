@@ -1,0 +1,8 @@
+app-product-list .pagination {
+    display: flex;
+    justify-content: center;
+}
+
+app-product-list .pagination button:not(:last-child) {
+    margin-right: 10px;
+}
