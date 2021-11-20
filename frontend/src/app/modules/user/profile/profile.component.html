@@ -1,7 +1,7 @@
 <nb-layout-column class="profile-wrapper">
-    <nb-card class="profile-card" *ngIf="userProfile">
+    <nb-card class="profile-card" *ngIf="userInfo">
         <nb-card-header>
-            <h1>Hello,  {{userProfile.username}}!</h1>
+            <h1>Hello,  {{userInfo.username}}!</h1>
         </nb-card-header>
         <nb-card-body class="info-wrapper">
             <nb-accordion>
@@ -10,28 +10,16 @@
                         Basic information
                     </nb-accordion-item-header>
                     <nb-accordion-item-body class="basic-info">
-                        <div class="detail-showcase">
-                            <label for="username">USERNAME</label>
-                            <input nbInput [disabled]="true" [(ngModel)]="userProfile.username" id="username">
-                        </div>
-                        <div class="detail-showcase">
-                            <label for="firstname">FIRST NAME</label>
-                            <input nbInput [disabled]="true" [(ngModel)]="userProfile.firstName" id="firstname">
-                        </div>
-                        <div class="detail-showcase">
-                            <label for="lastname">LAST NAME</label>
-                            <input nbInput [disabled]="true" [(ngModel)]="userProfile.lastName" id="lastname">
-                        </div>
-                        <div class="detail-showcase">
-                            <label for="email">EMAIL</label>
-                            <input nbInput [disabled]="true" [(ngModel)]="userProfile.email" id="email">
-                        </div>
+                        <app-basic-info [userInfo]="userInfo"></app-basic-info>
                     </nb-accordion-item-body>
                 </nb-accordion-item>
                 <nb-accordion-item>
                     <nb-accordion-item-header>
                         Addresses
                     </nb-accordion-item-header>
+                    <nb-accordion-item-body>
+                        <app-addresses [userAddresses]="userAddresses" [userId]="userId"></app-addresses>
+                    </nb-accordion-item-body>
                 </nb-accordion-item>
             </nb-accordion>
         </nb-card-body>

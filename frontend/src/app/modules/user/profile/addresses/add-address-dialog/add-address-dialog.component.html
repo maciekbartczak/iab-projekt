@@ -1,0 +1,57 @@
+<nb-card class="form-card" [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="giant">
+    <nb-card-header>
+        Add a new address
+    </nb-card-header>
+    <nb-card-body>
+        <nb-alert *ngIf="error" status="danger" class="error">
+            {{error}}
+        </nb-alert>
+        <form class="add-address-form" [formGroup]="addressForm" (ngSubmit)="addAddress()">
+
+            <input nbInput placeholder="Address line 1" type="text" formControlName="addressLine1"
+                   [(ngModel)]="model.addressLine1"
+                   [status]="submitted && addressForm.controls.addressLine1.errors  ? 'danger' : 'default'">
+            <div *ngIf="submitted && addressForm.controls.addressLine1.errors" class="input-error">
+                <p>Address line 1 is required!</p>
+            </div>
+
+            <input nbInput placeholder="Address line 2" type="text" formControlName="addressLine2"
+                   [(ngModel)]="model.addressLine2"
+                   [status]="submitted && addressForm.controls.addressLine2.errors  ? 'danger' : 'default'">
+            <div *ngIf="submitted && addressForm.controls.addressLine2.errors" class="input-error">
+                <p>Address line 2 is required!</p>
+            </div>
+
+            <input nbInput placeholder="City" type="text" formControlName="city"
+                   [(ngModel)]="model.city"
+                   [status]="submitted && addressForm.controls.city.errors  ? 'danger' : 'default'">
+            <div *ngIf="submitted && addressForm.controls.city.errors" class="input-error">
+                <p>City is required!</p>
+            </div>
+
+            <input nbInput placeholder="Postal code" type="text" formControlName="postalCode"
+                   [(ngModel)]="model.postalCode"
+                   [status]="submitted && addressForm.controls.postalCode.errors  ? 'danger' : 'default'">
+            <div *ngIf="submitted && addressForm.controls.postalCode.errors" class="input-error">
+                <p>Postal code is required!</p>
+            </div>
+
+            <input nbInput placeholder="Country" type="text" formControlName="country"
+                   [(ngModel)]="model.country"
+                   [status]="submitted && addressForm.controls.country.errors  ? 'danger' : 'default'">
+            <div *ngIf="submitted && addressForm.controls.country.errors" class="input-error">
+                <p>Country is required!</p>
+            </div>
+
+            <input nbInput placeholder="Phone number" type="text" formControlName="phoneNumber"
+                   [(ngModel)]="model.phoneNumber"
+                   [status]="submitted && addressForm.controls.phoneNumber.errors  ? 'danger' : 'default'">
+            <div *ngIf="submitted && addressForm.controls.phoneNumber.errors" class="input-error">
+                <p>Phone number is required!</p>
+            </div>
+
+
+            <button nbButton status="primary" type="submit">Add address</button>
+        </form>
+    </nb-card-body>
+</nb-card>

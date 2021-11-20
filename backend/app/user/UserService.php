@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../lib/Database.php';
 require_once __DIR__ . '/CreateUserRequest.php';
 require_once __DIR__ . '/User.php';
-require_once __DIR__ . '/UserProfile.php';
+require_once __DIR__ . '/UserInfo.php';
 require_once __DIR__ . '/CreateUserAddressRequest.php';
 
 
@@ -70,7 +70,7 @@ class UserService {
         return null;
     }
 
-    public function getUserProfileById(int $id): ?UserProfile
+    public function getUserInfoById(int $id): ?UserInfo
     {
         try
         {
@@ -78,7 +78,7 @@ class UserService {
             $statement = $this->db->prepare($query);
             $statement->bindParam(':id', $id);
             $statement->execute();
-            $user_profile = $statement->fetchObject('UserProfile');
+            $user_profile = $statement->fetchObject('UserInfo');
             if($user_profile)
             {
                 return $user_profile;
@@ -131,7 +131,7 @@ class UserService {
             $statement = $this->db->prepare('SELECT * FROM UserAddress WHERE id = :addressId');
             $statement->bindParam(':addressId', $address_id);
             $statement->execute();
-            return $statement->fetch(PDO::FETCH_ASSOC);
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e)
         {
             exit($e);

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { UserProfileResponse } from "../models/user.model";
+import { CreateUserAddressRequest, UserAddressResponse, UserProfileResponse } from "../models/user.model";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -15,4 +15,11 @@ export class UserService {
         return this.http.get<UserProfileResponse>(`api/user/${userId}/profile`);
     }
 
+    public getUserAddresses(userId: string): Observable<UserAddressResponse> {
+        return this.http.get<UserAddressResponse>(`api/user/${userId}/address`);
+    }
+
+    public addUserAddress(userId: string, address: CreateUserAddressRequest) {
+        return this.http.post(`api/user/${userId}/address`, address);
+    }
 }

@@ -10,7 +10,7 @@ import {
     NbButtonModule,
     NbUserModule,
     NbContextMenuModule,
-    NbMenuService, NbMenuModule, NbToastrModule,
+    NbMenuService, NbMenuModule, NbToastrModule, NbIconModule,
 } from '@nebular/theme';
 import { environment } from "../environments/environment";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
@@ -18,6 +18,7 @@ import { APIInterceptor } from "./interceptors/api.interceptor";
 import { AuthInterceptor } from "./interceptors/auth.interceptor";
 import { JWT_OPTIONS, JwtHelperService } from "@auth0/angular-jwt";
 import { NotFoundComponent } from './common/not-found/not-found.component';
+import { NbEvaIconsModule } from "@nebular/eva-icons";
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import { NotFoundComponent } from './common/not-found/not-found.component';
         NbMenuModule.forRoot(),
         NbContextMenuModule,
         NbToastrModule.forRoot(),
+        NbEvaIconsModule,
     ],
     providers: [
         {provide: "BASE_URL", useValue: environment.baseUrl},

@@ -12,13 +12,16 @@ Router::get('/api/user/([0-9]*)/profile', function(Request $req, Response $res) 
         return;
     }
 
-    $user_profile = $user_service->getUserProfileById($user_id);;
-    if(!$user_profile)
+    $user_info = $user_service->getUserInfoById($user_id);
+    if(!$user_info)
     {
       $res->status(HTTP_STATUS::NOT_FOUND)->send();
       return ;
     }
-    $res->body($user_profile)->send();
+    $user_addresses = $user_service->getUserAddress($user_id);
+
+    $res->body(['userInfo' => $user_info,
+                'userAddresses' => $user_addresses])->send();
 });
 
 Router::get('/api/user/([0-9]*)/address', function(Request $req, Response $res) {

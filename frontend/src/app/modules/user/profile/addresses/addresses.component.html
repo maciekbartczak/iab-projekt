@@ -1,0 +1,36 @@
+<div *ngIf="userAddresses">
+    <nb-accordion>
+        <nb-accordion-item *ngFor="let userAddress of userAddresses; let i = index">
+            <nb-accordion-item-header>
+                Address {{i}}
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                <div class="detail-showcase">
+                    <label for="addressLine1">Address line 1</label>
+                    <input nbInput [disabled]="true" [(ngModel)]="userAddress.addressLine1" id="addressLine1">
+                </div>
+                <div class="detail-showcase">
+                    <label for="addressLine2">Address line 2</label>
+                    <input nbInput [disabled]="true" [(ngModel)]="userAddress.addressLine2" id="addressLine2">
+                </div>
+                <div class="detail-showcase">
+                    <label for="city">City</label>
+                    <input nbInput [disabled]="true" [(ngModel)]="userAddress.city" id="city">
+                </div>
+                <div class="detail-showcase">
+                    <label for="postalCode">Postal code</label>
+                    <input nbInput [disabled]="true" [(ngModel)]="userAddress.postalCode" id="postalCode">
+                </div>
+                <div class="detail-showcase">
+                    <label for="country">Country</label>
+                    <input nbInput [disabled]="true" [(ngModel)]="userAddress.country" id="country">
+                </div>
+                <div class="detail-showcase">
+                    <label for="phoneNumber">Phone number</label>
+                    <input nbInput [disabled]="true" [(ngModel)]="userAddress.phoneNumber" id="phoneNumber">
+                </div>
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+    <button nbButton status="primary" fullWidth (click)="openAddAddressDialog()"><nb-icon icon="plus"></nb-icon></button>
+</div>
