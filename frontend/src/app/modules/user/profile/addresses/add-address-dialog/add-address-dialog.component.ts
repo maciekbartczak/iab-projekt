@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CreateUserAddressRequest } from "../../../../../models/user.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "../../../../../services/user.service";
+import { NbDialogRef } from "@nebular/theme";
 
 @Component({
     selector: 'app-add-address-dialog',
@@ -29,7 +30,8 @@ export class AddAddressDialogComponent implements OnInit {
 
 
     constructor(private formBuilder: FormBuilder,
-                private userService: UserService) {
+                private userService: UserService,
+                protected dialogRef: NbDialogRef<any>) {
         this.addressForm = this.formBuilder.group({
                 addressLine1: ['', Validators.required],
                 addressLine2: [''],
@@ -55,6 +57,7 @@ export class AddAddressDialogComponent implements OnInit {
         this.userService.addUserAddress(this.userId, this.model).subscribe(
             () => {
                 this.loading = false;
+                this.dialogRef.close();
             },
             () => {
                 this.error = 'Error occurred! Please try again later';

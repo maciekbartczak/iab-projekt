@@ -18,7 +18,7 @@
                         Addresses
                     </nb-accordion-item-header>
                     <nb-accordion-item-body>
-                        <app-addresses [userAddresses]="userAddresses" [userId]="userId"></app-addresses>
+                        <app-addresses [userAddresses]="userAddresses" [userId]="userId" (refreshProfileEvent)="fetchProfile()"></app-addresses>
                     </nb-accordion-item-body>
                 </nb-accordion-item>
             </nb-accordion>

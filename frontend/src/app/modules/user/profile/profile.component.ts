@@ -20,6 +20,10 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.fetchProfile();
+    }
+
+    fetchProfile() {
         this.userService.getUserProfile(this.userId).subscribe(
             (res) => {
                 this.userInfo = res.userInfo;
