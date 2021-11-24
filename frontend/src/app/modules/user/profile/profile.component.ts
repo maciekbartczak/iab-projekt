@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { UserService } from "../../../services/user.service";
-import { UserProfileResponse } from "../../../models/user.model";
+import { UserAddressResponse, UserInfo } from "../../../models/user.model";
 
 @Component({
     selector: 'app-profile',
@@ -11,7 +11,8 @@ import { UserProfileResponse } from "../../../models/user.model";
 export class ProfileComponent implements OnInit {
 
     userId: string = '';
-    userProfile?: UserProfileResponse;
+    userInfo?: UserInfo;
+    userAddresses?: UserAddressResponse[];
 
     constructor(private route: ActivatedRoute,
                 private userService: UserService) {
@@ -19,9 +20,14 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.fetchProfile();
+    }
+
+    fetchProfile() {
         this.userService.getUserProfile(this.userId).subscribe(
             (res) => {
-                this.userProfile = res;
+                this.userInfo = res.userInfo;
+                this.userAddresses = res.userAddresses;
             }
         );
     }

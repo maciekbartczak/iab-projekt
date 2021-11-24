@@ -1,0 +1,25 @@
+app-add-address-dialog .add-address-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+app-add-address-dialog .add-address-form > input, button {
+    margin-top: 10px;
+    min-width: 320px;
+}
+
+app-add-address-dialog .error {
+    min-width: 320px;
+    text-align: center;
+    margin: 0;
+}
+
+app-add-address-dialog .input-error {
+    min-width: 320px;
+}
+
+app-add-address-dialog .input-error p {
+    color: red;
+    margin: 5px 0 0 0;
+}

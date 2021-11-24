@@ -3,7 +3,8 @@
 require_once __DIR__ . '/../lib/Database.php';
 require_once __DIR__ . '/CreateUserRequest.php';
 require_once __DIR__ . '/User.php';
-require_once __DIR__ . '/UserProfile.php';
+require_once __DIR__ . '/UserInfo.php';
+require_once __DIR__ . '/CreateUserAddressRequest.php';
 
 
 class UserService {
@@ -69,7 +70,7 @@ class UserService {
         return null;
     }
 
-    public function getUserProfileById(int $id): ?UserProfile
+    public function getUserInfoById(int $id): ?UserInfo
     {
         try
         {
@@ -77,7 +78,7 @@ class UserService {
             $statement = $this->db->prepare($query);
             $statement->bindParam(':id', $id);
             $statement->execute();
-            $user_profile = $statement->fetchObject('UserProfile');
+            $user_profile = $statement->fetchObject('UserInfo');
             if($user_profile)
             {
                 return $user_profile;
@@ -89,5 +90,63 @@ class UserService {
         return null;
     }
 
+    public function saveUserAddress(CreateUserAddressRequest $createUserAddressRequest)
+    {
+        try
+        {
+            $statement = $this->db->prepare('INSERT INTO UserAddress (UserId, addressLine1, addressLine2, city, postalCode, country, phoneNumber) 
+                                                    VALUES (:UserId, :addressLine1, :addressLine2, :city, :postalCode, :country, :phoneNumber)');
+            $statement->bindParam(':UserId', $createUserAddressRequest->userId);
+            $statement->bindParam(':addressLine1', $createUserAddressRequest->addressLine1);
+            $statement->bindParam(':addressLine2', $createUserAddressRequest->addressLine2);
+            $statement->bindParam(':city', $createUserAddressRequest->city);
+            $statement->bindParam(':postalCode', $createUserAddressRequest->postalCode);
+            $statement->bindParam(':country', $createUserAddressRequest->country);
+            $statement->bindParam(':phoneNumber', $createUserAddressRequest->phoneNumber);
+            $statement->execute();
+        } catch (PDOException $e)
+        {
+            exit($e);
+        }
+    }
 
+    public function getUserAddresses(int $user_id)
+    {
+        try
+        {
+            $statement = $this->db->prepare('SELECT * FROM UserAddress WHERE UserId = :UserId');
+            $statement->bindParam(':UserId', $user_id);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e)
+        {
+            exit($e);
+        }
+    }
+
+    public function getUserAddress(int $address_id)
+    {
+        try
+        {
+            $statement = $this->db->prepare('SELECT * FROM UserAddress WHERE id = :addressId');
+            $statement->bindParam(':addressId', $address_id);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e)
+        {
+            exit($e);
+        }
+    }
+
+    public function deleteUserAddress(int $address_id)
+    {
+        try {
+            $statement = $this->db->prepare('DELETE FROM UserAddress WHERE id = :addressId');
+            $statement->bindParam(':addressId', $address_id);
+            $statement->execute();
+        } catch (PDOException $e)
+        {
+            exit($e);
+        }
+    }
 }

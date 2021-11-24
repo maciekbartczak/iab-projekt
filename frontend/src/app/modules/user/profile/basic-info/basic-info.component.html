@@ -1,0 +1,18 @@
+<div *ngIf="userInfo">
+    <div class="detail-showcase">
+        <label for="username">USERNAME</label>
+        <input nbInput [disabled]="true" [(ngModel)]="userInfo.username" id="username">
+    </div>
+    <div class="detail-showcase">
+        <label for="firstname">FIRST NAME</label>
+        <input nbInput [disabled]="true" [(ngModel)]="userInfo.firstName" id="firstname">
+    </div>
+    <div class="detail-showcase">
+        <label for="lastname">LAST NAME</label>
+        <input nbInput [disabled]="true" [(ngModel)]="userInfo.lastName" id="lastname">
+    </div>
+    <div class="detail-showcase">
+        <label for="email">EMAIL</label>
+        <input nbInput [disabled]="true" [(ngModel)]="userInfo.email" id="email">
+    </div>
+</div>
