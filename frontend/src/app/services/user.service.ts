@@ -22,4 +22,8 @@ export class UserService {
     public addUserAddress(userId: string, address: CreateUserAddressRequest) {
         return this.http.post(`api/user/${userId}/address`, address);
     }
+
+    public deleteAddress(addressId: number) {
+        return this.http.delete(`api/user/address/${addressId}`);
+    }
 }

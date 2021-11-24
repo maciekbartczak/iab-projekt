@@ -131,7 +131,7 @@ class UserService {
             $statement = $this->db->prepare('SELECT * FROM UserAddress WHERE id = :addressId');
             $statement->bindParam(':addressId', $address_id);
             $statement->execute();
-            return $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $statement->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e)
         {
             exit($e);

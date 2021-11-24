@@ -29,6 +29,7 @@
                     <label for="phoneNumber">Phone number</label>
                     <input nbInput [disabled]="true" [(ngModel)]="userAddress.phoneNumber" id="phoneNumber">
                 </div>
+                <button nbButton status="danger" fullWidth (click)="deleteAddress(userAddress.id)"><nb-icon icon="trash-2"></nb-icon></button>
             </nb-accordion-item-body>
         </nb-accordion-item>
     </nb-accordion>
