@@ -25,6 +25,12 @@ const routes: Routes = [
             import('./modules/user/user.module').then(m => m.UserModule),
         canLoad: [AuthGuard]
     },
+    {
+        path: 'cart',
+        loadChildren: () =>
+            import('./modules/cart/cart.module').then(m => m.CartModule),
+        canLoad: [AuthGuard]
+    },
     {path: '404', component: NotFoundComponent},
     {path: '**', redirectTo: '/404'}
 ];

@@ -24,3 +24,7 @@ app-root .login-button {
     margin-right: 1rem;
 }
 
+app-root .navigation :not(:last-child){
+    margin-right: 1.5rem;
+}
+

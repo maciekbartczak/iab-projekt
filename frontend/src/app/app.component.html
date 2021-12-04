@@ -4,6 +4,11 @@
       <div class="main-header">
           <div class="navigation">
               <a nbButton routerLink="/products/list">Products</a>
+              <a *ngIf="user"
+                  nbButton routerLink="/cart">
+                  Cart
+                  <nb-icon icon="shopping-cart"></nb-icon>
+              </a>
           </div>
           <div class="auth-wrapper">
               <div class="auth-links" *ngIf="!user">
