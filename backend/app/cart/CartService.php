@@ -21,6 +21,10 @@ class CartService
         $this->cart_item_service->addCartItem($cart->id, $item_id, $item_quantity);
     }
 
+    public function removeItem($item_id, $user_id) {
+        return $this->cart_item_service->removeCartItem($item_id, $user_id);
+    }
+
     public function getCartByUserId($user_id)
     {
         try {

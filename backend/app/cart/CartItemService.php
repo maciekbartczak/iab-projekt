@@ -47,9 +47,39 @@ class CartItemService
         }
     }
 
-    public function removeCartItem($item_id)
+    public function removeCartItem($item_id, $user_id)
     {
+        try {
+            $item = $this->getCartItemById($item_id);
+            if (!$item) {
+                return false;
+            }
 
+            $statement = $this->db->prepare('SELECT * FROM ShoppingCart WHERE id = :id');
+            $statement->bindParam(':id', $item->cartId);
+            $statement->execute();
+            $cart = $statement->fetchObject('ShoppingCart');
+
+            if ($cart->UserId != $user_id) {
+                return false;
+            }
+
+            $statement = $this->db->prepare('DELETE FROM CartItem WHERE id = :id');
+            $statement->bindParam(':id', $item_id);
+            $statement->execute();
+
+            $product = $this->product_service->getProductById($item->productId);
+            $new_total = $cart->total - ($product->price * $item->quantity);
+
+            $statement = $this->db->prepare('UPDATE ShoppingCart SET total = :total WHERE id = :id');
+            $statement->bindParam(':total', $new_total);
+            $statement->bindParam(':id', $item->cartId);
+            $statement->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            exit($e);
+        }
     }
 
     public function getAllCartItems($cart_id)
@@ -84,5 +114,17 @@ class CartItemService
             exit($e);
         }
         return null;
+    }
+
+    private function getCartItemById($item_id)
+    {
+        try {
+            $statement = $this->db->prepare('SELECT * FROM CartItem WHERE id = :id');
+            $statement->bindParam(':id', $item_id);
+            $statement->execute();
+            return $statement->fetchObject();
+        } catch (PDOException $e) {
+            exit($e);
+        }
     }
 }
