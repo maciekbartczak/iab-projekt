@@ -135,3 +135,7 @@ INSERT INTO ProductCategories VALUES (3, 1);
 INSERT INTO Product (id, name, description, price, imageUrl) VALUES (4, 'Apple MacBook Pro M1/16GB/256/Mac OS Space Gray', '', 7100, 'product_images/macbook-pro-space-gray.png');
 INSERT INTO ProductCategories VALUES (4, 1);
 
+INSERT INTO ShoppingCart (UserId, total) VALUES (1, 0);
+INSERT INTO ShoppingCart (UserId, total) VALUES (2, 0);
+INSERT INTO ShoppingCart (UserId, total) VALUES (3, 0);
+

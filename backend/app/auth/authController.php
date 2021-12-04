@@ -5,6 +5,7 @@ require_once __DIR__ . '/../user/UserService.php';
 require_once __DIR__ . '/../user/User.php';
 require_once __DIR__ . '/../user/CreateUserRequest.php';
 require_once __DIR__ . '/../lib/JwtUtils.php';
+require_once __DIR__ . '/../cart/CartService.php';
 
 
 Router::post('/api/auth/register', function (Request $req, Response $res) {
@@ -35,6 +36,10 @@ Router::post('/api/auth/register', function (Request $req, Response $res) {
 
     $user_service = new UserService();
     $user_service->saveUser(new CreateUserRequest($username, $password, $first_name, $last_name, $email));
+    $created_user = $user_service->getUserByUsername($username);
+
+    $cart_service = new CartService();
+    $cart_service->createCart($created_user->id);
 
     $res->status(HTTP_STATUS::CREATED)->send();
 

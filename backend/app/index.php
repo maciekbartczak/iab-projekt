@@ -1,4 +1,7 @@
 <?php
+ini_set('memory_limit', '512M');
+
+
 require __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/lib/Router.php';
 require_once __DIR__ . '/lib/Request.php';
@@ -11,6 +14,7 @@ $GLOBALS['route_matched'] = false;
 require_once __DIR__ . '/auth/authController.php';
 require_once __DIR__ . '/user/userController.php';
 require_once __DIR__ . '/product/productController.php';
+require_once __DIR__ . '/cart/cartController.php';
 
 if (!$GLOBALS['route_matched']) {
     $res = new Response();
