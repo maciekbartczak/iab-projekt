@@ -22,12 +22,28 @@ class CartItemService
             if (!$product) {
                 return false;
             }
-            $statement = $this->db->prepare('INSERT INTO CartItem (cartId, productId, quantity) 
-                                                VALUES (:cartId, :productId, :quantity)');
+
+            $statement = $this->db->prepare('SELECT * FROM CartItem WHERE productId=:productId AND cartId=:cartId');
             $statement->bindParam(':cartId', $cart_id);
             $statement->bindParam(':productId', $product_id);
-            $statement->bindParam(':quantity', $quantity);
             $statement->execute();
+            $cart_item = $statement->fetchObject();
+
+            if ($cart_item) {
+                $statement = $this->db->prepare('UPDATE CartItem SET quantity = :quantity WHERE id = :id');
+                $new_quantity = $cart_item->quantity + $quantity;
+                $statement->bindParam(':quantity', $new_quantity);
+                $statement->bindParam(':id', $cart_item->id);
+                $statement->execute();
+            } else
+            {
+                $statement = $this->db->prepare('INSERT INTO CartItem (cartId, productId, quantity) 
+                                                VALUES (:cartId, :productId, :quantity)');
+                $statement->bindParam(':cartId', $cart_id);
+                $statement->bindParam(':productId', $product_id);
+                $statement->bindParam(':quantity', $quantity);
+                $statement->execute();
+            }
 
             $statement = $this->db->prepare('SELECT * FROM ShoppingCart WHERE id = :id');
             $statement->bindParam(':id', $cart_id);

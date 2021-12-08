@@ -14,6 +14,7 @@ export class ItemsListComponent implements OnInit {
 
     cart?: CartResponse;
     private user?: User;
+    loading = false;
 
     constructor(private cartService: CartService,
                 private authService: AuthService,
@@ -29,6 +30,7 @@ export class ItemsListComponent implements OnInit {
 
 
     removeProduct(id: string) {
+        this.loading = true;
         if (!this.user) {
             return ;
         }
@@ -36,18 +38,28 @@ export class ItemsListComponent implements OnInit {
             () => {
                 this.toastService.success('', 'Product has been removed from your cart!');
                 this.fetchCart();
+                this.loading = false;
             },
             () => {
                 this.toastService.danger('Something went wrong!', 'Please try again.');
+                this.loading = false;
             }
         );
     }
 
     private fetchCart() {
+        this.loading = true;
         if (this.user) {
             this.cartService.getCart(this.user.id).subscribe(
-                (response) => this.cart = response
+                (response) => {
+                    this.cart = response;
+                    this.loading = false;
+                },
+                () =>{
+                    this.loading = false;
+                }
             );
         }
+
     }
 }
