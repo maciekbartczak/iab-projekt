@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CreateUserAddressRequest } from "../../../../../models/user.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "../../../../../services/user.service";
@@ -9,7 +9,7 @@ import { NbDialogRef } from "@nebular/theme";
     templateUrl: './add-address-dialog.component.html',
     styles: []
 })
-export class AddAddressDialogComponent implements OnInit {
+export class AddAddressDialogComponent  {
 
     @Input()
     userId = '';
@@ -42,8 +42,6 @@ export class AddAddressDialogComponent implements OnInit {
         });
     }
 
-    ngOnInit(): void {
-    }
 
     addAddress() {
         this.submitted = true;

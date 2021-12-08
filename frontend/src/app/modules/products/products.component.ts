@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-products',
     template: '<router-outlet></router-outlet>'
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent  {
 
     constructor() {
     }
 
-    ngOnInit(): void {
-    }
 
 }

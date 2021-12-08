@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from "../../../../models/product.model";
 
 @Component({
@@ -6,7 +6,7 @@ import { Product } from "../../../../models/product.model";
     templateUrl: './product-table.component.html',
     styles: []
 })
-export class ProductTableComponent implements OnInit {
+export class ProductTableComponent  {
 
 
     @Input()
@@ -18,8 +18,6 @@ export class ProductTableComponent implements OnInit {
     constructor() {
     }
 
-    ngOnInit(): void {
-    }
 
     addToCart(id: number) {
         this.addToCartEvent.emit(id);

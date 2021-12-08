@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CreateUserAddressRequest, UserAddressResponse} from "../../../../models/user.model";
+import {UserAddressResponse} from "../../../../models/user.model";
 import {NbDialogService, NbToastrService} from "@nebular/theme";
 import { AddAddressDialogComponent } from "./add-address-dialog/add-address-dialog.component";
 import {UserService} from "../../../../services/user.service";
