@@ -1,32 +1,35 @@
 <nb-layout>
 
-  <nb-layout-header fixed>
-      <div class="main-header">
-          <div class="navigation">
-              <a nbButton routerLink="/products/list">Products</a>
-              <a *ngIf="user"
-                  nbButton routerLink="/cart">
-                  Cart
-                  <nb-icon icon="shopping-cart"></nb-icon>
-              </a>
-          </div>
-          <div class="auth-wrapper">
-              <div class="auth-links" *ngIf="!user">
-                  <a nbButton outline status="primary" routerLink="/auth/login" class="login-button">Login</a>
-                  <a nbButton status="primary"  routerLink="/auth/register">Register</a>
-              </div>
-              <nb-user *ngIf="user" name={{user.username}} [nbContextMenu]="menuItems" nbContextMenuTag="user-context-menu"></nb-user>
-          </div>
-      </div>
+    <nb-layout-header fixed>
+        <div class="main-header">
+            <div class="navigation">
+                <a nbButton routerLink="/products/list">
+                    <nb-icon icon="list"></nb-icon>
+                    Products
+                </a>
+                <a *ngIf="user" nbButton routerLink="/cart">
+                    <nb-icon icon="shopping-cart"></nb-icon>
+                    Cart
+                </a>
+            </div>
+            <div class="auth-wrapper">
+                <div class="auth-links" *ngIf="!user">
+                    <a nbButton outline status="primary" routerLink="/auth/login" class="login-button">Login</a>
+                    <a nbButton status="primary" routerLink="/auth/register">Register</a>
+                </div>
+                <nb-user *ngIf="user" name={{user.username}} [nbContextMenu]="menuItems"
+                         nbContextMenuTag="user-context-menu"></nb-user>
+            </div>
+        </div>
 
-  </nb-layout-header>
+    </nb-layout-header>
 
-  <nb-layout-column class="main-col">
-    <router-outlet></router-outlet>
-  </nb-layout-column>
+    <nb-layout-column class="main-col">
+        <router-outlet></router-outlet>
+    </nb-layout-column>
 
-  <nb-layout-footer fixed>
-  <!-- Insert footer here -->
-  </nb-layout-footer>
+    <nb-layout-footer fixed>
+        <!-- Insert footer here -->
+    </nb-layout-footer>
 
 </nb-layout>
