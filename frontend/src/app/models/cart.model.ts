@@ -1,5 +1,5 @@
 export interface AddCartItemRequest {
-    itemId: string,
+    itemId: number,
     quantity: number
 }
 

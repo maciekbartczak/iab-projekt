@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from "../../../services/product.service";
 import { Product } from "../../../models/product.model";
+import { CartService } from "../../../services/cart.service";
+import { AuthService } from "../../../services/auth.service";
+import { User } from "../../../models/user.model";
+import { NbToastrService } from "@nebular/theme";
 
 @Component({
     selector: 'app-product-list',
@@ -13,8 +17,12 @@ export class ProductListComponent implements OnInit {
     pageNumber = 1;
     productsPerPage = 3;
     totalPages?: number;
+    private user?: User;
 
-    constructor(private productService: ProductService) {
+    constructor(private productService: ProductService,
+                private cartService: CartService,
+                private authService: AuthService,
+                private toastService: NbToastrService) {
     }
 
     ngOnInit(): void {
@@ -31,6 +39,23 @@ export class ProductListComponent implements OnInit {
             (res) => {
                 this.products = res.items;
                 this.totalPages = res.totalPages;
+            }
+        );
+    }
+
+    addToCart(id: number): void {
+        this.authService.currentUser.subscribe(
+            user => this.user = user
+        );
+        if (!this.user) {
+            return ;
+        }
+        this.cartService.addCartItem(this.user.id, { itemId: id, quantity: 1}).subscribe(
+            () => {
+                this.toastService.success('', 'Product has been added to cart!')
+            },
+            () => {
+                this.toastService.danger('Pleas try again.', 'Something went wrong!')
             }
         );
     }

@@ -3,6 +3,7 @@ import { CartService } from "../../../services/cart.service";
 import { CartResponse } from "../../../models/cart.model";
 import { AuthService } from "../../../services/auth.service";
 import { User } from "../../../models/user.model";
+import { NbToastrService } from "@nebular/theme";
 
 @Component({
     selector: 'app-items-list',
@@ -15,20 +16,38 @@ export class ItemsListComponent implements OnInit {
     private user?: User;
 
     constructor(private cartService: CartService,
-                private authService: AuthService) {
+                private authService: AuthService,
+                private toastService: NbToastrService) {
         this.authService.currentUser.subscribe(
             (user) => this.user = user
         )
     }
 
     ngOnInit(): void {
-        if (this.user) {
-            this.cartService.getCart(this.user.id).subscribe(
-                (response) => this.cart = response
-            )
-        }
+       this.fetchCart();
     }
 
 
+    removeProduct(id: string) {
+        if (!this.user) {
+            return ;
+        }
+        this.cartService.removeCartItem(this.user.id, id).subscribe(
+            () => {
+                this.toastService.success('', 'Product has been removed from your cart!');
+                this.fetchCart();
+            },
+            () => {
+                this.toastService.danger('Something went wrong!', 'Please try again.');
+            }
+        );
+    }
 
+    private fetchCart() {
+        if (this.user) {
+            this.cartService.getCart(this.user.id).subscribe(
+                (response) => this.cart = response
+            );
+        }
+    }
 }

@@ -4,6 +4,7 @@
 @import "profile/add-address-dialog.css";
 @import "product/app-product-table.css";
 @import "product/app-product-list.css";
+@import "cart/app-items-list.css";
 
 * {
   box-sizing: border-box;

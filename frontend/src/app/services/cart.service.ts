@@ -19,7 +19,7 @@ export class CartService {
         return this.http.get<CartResponse>(`api/user/${userId}/cart`);
     }
 
-    removeCartItem(userId: number, itemId: number) {
+    removeCartItem(userId: number, itemId: string) {
         return this.http.delete(`api/user/${userId}/cart/item/${itemId}`);
     }
 }

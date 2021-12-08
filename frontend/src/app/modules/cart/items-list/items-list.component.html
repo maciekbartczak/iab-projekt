@@ -1,6 +1,24 @@
-<nb-layout-column>
-    <div *ngIf="cart">
-        {{ cart | json }}
-    </div>
+<nb-layout-column class="cart-wrapper">
+    <nb-card class="cart-card" *ngIf="cart">
+        <nb-card-header>
+            <h2 class="products-header">Your cart</h2>
+        </nb-card-header>
+        <nb-card-body class="cart-card-body">
+            <nb-list>
+                <nb-list-item *ngFor="let product of cart.products" class="item-row">
+                    <span class="product-name">{{product.name}}</span>
+                    <span class="product-price">{{product.price | currency: 'PLN'}}</span>
+                    <button class="remove-product-button" nbButton status="danger" (click)="removeProduct(product.id)">
+                        <nb-icon icon="trash-2"></nb-icon>
+                    </button>
+                </nb-list-item>
+                <nb-list-item class="cart-summary">
+                    <span class="cart-summary-total-label">Total: </span>
+                    <span class="cart-summary-total-value">{{cart.cartInfo.total | currency:'PLN'}}</span>
+                    <span class="empty-col"></span>
+                </nb-list-item>
+            </nb-list>
+        </nb-card-body>
+    </nb-card>
 </nb-layout-column>
 

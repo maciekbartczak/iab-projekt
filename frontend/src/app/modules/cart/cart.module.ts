@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CartRoutingModule } from './cart-routing.module';
 import { CartComponent } from './cart.component';
 import { ItemsListComponent } from './items-list/items-list.component';
-import { NbLayoutModule } from "@nebular/theme";
+import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbListModule } from "@nebular/theme";
 
 
 @NgModule({
@@ -15,7 +15,11 @@ import { NbLayoutModule } from "@nebular/theme";
     imports: [
         CommonModule,
         CartRoutingModule,
-        NbLayoutModule
+        NbLayoutModule,
+        NbCardModule,
+        NbListModule,
+        NbButtonModule,
+        NbIconModule
     ]
 })
 export class CartModule { }
