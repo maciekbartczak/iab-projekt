@@ -24,3 +24,10 @@ app-root .login-button {
     margin-right: 1rem;
 }
 
+app-root .footer-love {
+    color: red;
+}
+
+app-root .author-link {
+    text-decoration: none;
+}
