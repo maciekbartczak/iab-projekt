@@ -38,6 +38,7 @@ import { NbEvaIconsModule } from "@nebular/eva-icons";
         NbContextMenuModule,
         NbToastrModule.forRoot(),
         NbEvaIconsModule,
+        NbIconModule,
     ],
     providers: [
         {provide: "BASE_URL", useValue: environment.baseUrl},

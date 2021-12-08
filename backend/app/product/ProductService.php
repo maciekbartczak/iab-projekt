@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../lib/Database.php';
+require_once __DIR__ . '/Product.php';
 
 class ProductService {
     private Database $db;
@@ -46,6 +47,22 @@ class ProductService {
             $products = $statement->fetchAll(PDO::FETCH_ASSOC);
             if ($products) {
                 return $products;
+            }
+        } catch (PDOException $e) {
+            exit($e);
+        }
+        return null;
+    }
+
+    public function getProductById($product_id)
+    {
+        try {
+            $statement = $this->db->prepare("SELECT * FROM Product WHERE id = :id");
+            $statement->bindParam(":id", $product_id);
+            $statement->execute();
+            $product = $statement->fetchObject('Product');
+            if ($product) {
+                return $product;
             }
         } catch (PDOException $e) {
             exit($e);

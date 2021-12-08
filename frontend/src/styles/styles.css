@@ -4,6 +4,7 @@
 @import "profile/add-address-dialog.css";
 @import "product/app-product-table.css";
 @import "product/app-product-list.css";
+@import "cart/app-items-list.css";
 
 * {
   box-sizing: border-box;
@@ -22,6 +23,10 @@ app-root .main-header {
 
 app-root .login-button {
     margin-right: 1rem;
+}
+
+app-root .navigation :not(:last-child){
+    margin-right: 1.5rem;
 }
 
 app-root .footer-love {
