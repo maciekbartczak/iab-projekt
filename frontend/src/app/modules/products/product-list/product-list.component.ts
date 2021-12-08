@@ -18,6 +18,7 @@ export class ProductListComponent implements OnInit {
     productsPerPage = 3;
     totalPages?: number;
     private user?: User;
+    loading = false;
 
     constructor(private productService: ProductService,
                 private cartService: CartService,
@@ -35,10 +36,12 @@ export class ProductListComponent implements OnInit {
     }
 
     fetchPage(): void {
+        this.loading = true;
         this.productService.getProductsPage({pageNumber: this.pageNumber, productsPerPage: this.productsPerPage}).subscribe(
             (res) => {
                 this.products = res.items;
                 this.totalPages = res.totalPages;
+                this.loading = false;
             }
         );
     }

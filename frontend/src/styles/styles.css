@@ -29,3 +29,10 @@ app-root .navigation :not(:last-child){
     margin-right: 1.5rem;
 }
 
+app-root .footer-love {
+    color: red;
+}
+
+app-root .author-link {
+    text-decoration: none;
+}
