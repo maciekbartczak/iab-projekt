@@ -7,9 +7,7 @@ import {AuthGuardService} from "../../../../services/auth-guard.service";
     templateUrl: './product-table.component.html',
     styles: []
 })
-export class ProductTableComponent implements OnChanges {
-
-    productQuantity: number[] = [];
+export class ProductTableComponent {
 
     @Input()
     public products?: Product[];
@@ -20,16 +18,11 @@ export class ProductTableComponent implements OnChanges {
     constructor(public authGuard: AuthGuardService) {
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        if (this.products) {
-            this.productQuantity = new Array(this.products.length).fill(1);
+    addToCart(id: number, quantity: string) {
+        let quantityValue = parseInt(quantity)
+        if (quantityValue > 99) {
+            quantityValue = 99;
         }
-    }
-
-    addToCart(id: number, quantity: number) {
-        if (quantity > 99) {
-            quantity = 99;
-        }
-        this.addToCartEvent.emit({id, quantity});
+        this.addToCartEvent.emit({id, quantity: quantityValue});
     }
 }

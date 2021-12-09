@@ -11,10 +11,9 @@
                     <div class="price-cart-wrapper">
                         <h6 class="product-price">{{product.price}} PLN</h6>
                         <div class="add-to-cart-wrapper">
-                            <input nbInput type="number" min="1" max="99" class="product-quantity"
-                                   [(ngModel)]="productQuantity[i]">
+                            <input nbInput type="number" value="1" min="1" max="99" class="product-quantity" #quantity>
                             <button nbButton status="success" class="cart-button"
-                                    (click)="authGuard.canLoad() && addToCart(product.id, productQuantity[i])">
+                                    (click)="authGuard.canLoad() && addToCart(product.id, quantity.value)">
                                 Add to cart
                             </button>
                         </div>
