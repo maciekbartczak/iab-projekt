@@ -35,8 +35,20 @@ app-product-table .price-cart-wrapper {
 
 app-product-table .cart-button {
     min-width: 100px;
+    margin: 0 0 0 0.5rem;
 }
 
 app-product-table .description-card-wrapper, .description-card {
     height: 100%;
+}
+
+app-product-list .add-to-cart-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+app-product-list .product-quantity {
+    max-width: 75px !important;
 }

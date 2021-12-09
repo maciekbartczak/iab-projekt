@@ -4,6 +4,7 @@ import { CartResponse } from "../../../models/cart.model";
 import { AuthService } from "../../../services/auth.service";
 import { User } from "../../../models/user.model";
 import { NbToastrService } from "@nebular/theme";
+import {AuthGuardService} from "../../../services/auth-guard.service";
 
 @Component({
     selector: 'app-items-list',
@@ -18,7 +19,8 @@ export class ItemsListComponent implements OnInit {
 
     constructor(private cartService: CartService,
                 private authService: AuthService,
-                private toastService: NbToastrService) {
+                private toastService: NbToastrService,
+                public authGuard: AuthGuardService) {
         this.authService.currentUser.subscribe(
             (user) => this.user = user
         )

@@ -8,7 +8,7 @@
                 <nb-list-item *ngFor="let product of cart.products" class="item-row">
                     <span class="product-name">{{product.name}}</span>
                     <span class="product-price">{{product.price | currency: 'PLN'}} x {{product.quantity}}</span>
-                    <button class="remove-product-button" nbButton status="danger" (click)="removeProduct(product.id)">
+                    <button class="remove-product-button" nbButton status="danger" (click)="authGuard.canLoad() && removeProduct(product.id)">
                         <nb-icon icon="trash-2"></nb-icon>
                     </button>
                 </nb-list-item>
