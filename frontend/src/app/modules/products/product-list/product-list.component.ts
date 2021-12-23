@@ -5,6 +5,7 @@ import { CartService } from "../../../services/cart.service";
 import { AuthService } from "../../../services/auth.service";
 import { User } from "../../../models/user.model";
 import { NbToastrService } from "@nebular/theme";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-product-list',
@@ -23,7 +24,8 @@ export class ProductListComponent implements OnInit {
     constructor(private productService: ProductService,
                 private cartService: CartService,
                 private authService: AuthService,
-                private toastService: NbToastrService) {
+                private toastService: NbToastrService,
+                private router: Router) {
     }
 
     ngOnInit(): void {
@@ -46,14 +48,16 @@ export class ProductListComponent implements OnInit {
         );
     }
 
-    addToCart(id: number): void {
+    addToCart(product: {id: number, quantity: number}): void {
         this.authService.currentUser.subscribe(
             user => this.user = user
         );
         if (!this.user) {
+            this.router.navigate(['/auth/login']);
+            this.toastService.warning('You need to be logged in to add products to cart.', 'Please log in!')
             return ;
         }
-        this.cartService.addCartItem(this.user.id, { itemId: id, quantity: 1}).subscribe(
+        this.cartService.addCartItem(this.user.id, { itemId: product.id, quantity: product.quantity}).subscribe(
             () => {
                 this.toastService.success('', 'Product has been added to cart!')
             },

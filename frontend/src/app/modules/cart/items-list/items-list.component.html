@@ -7,8 +7,14 @@
             <nb-list>
                 <nb-list-item *ngFor="let product of cart.products" class="item-row">
                     <span class="product-name">{{product.name}}</span>
-                    <span class="product-price">{{product.price | currency: 'PLN'}} x {{product.quantity}}</span>
-                    <button class="remove-product-button" nbButton status="danger" (click)="removeProduct(product.id)">
+                    <span class="product-price-quantity-wrapper">
+                        <span class="product-price">{{product.price | currency: 'PLN'}}</span>
+                        <input class="product-quantity" nbInput type="number" value="1" min="1" max="99" class="product-quantity"
+                               [(ngModel)]="product.quantity"
+                               (ngModelChange)="updateQuantity(product)">
+                    </span>
+                    <button class="remove-product-button" nbButton status="danger"
+                            (click)="authGuard.canLoad() && removeProduct(product.id)">
                         <nb-icon icon="trash-2"></nb-icon>
                     </button>
                 </nb-list-item>

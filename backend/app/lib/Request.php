@@ -18,7 +18,7 @@ class Request
 
     private function create_body()
     {
-        if ($this->reqMethod !== 'POST') {
+        if ($this->reqMethod !== 'POST' && $this->reqMethod !== 'PUT') {
             return [];
         }
 

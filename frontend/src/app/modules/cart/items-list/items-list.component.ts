@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from "../../../services/cart.service";
-import { CartResponse } from "../../../models/cart.model";
+import { CartProduct, CartResponse } from "../../../models/cart.model";
 import { AuthService } from "../../../services/auth.service";
 import { User } from "../../../models/user.model";
 import { NbToastrService } from "@nebular/theme";
+import {AuthGuardService} from "../../../services/auth-guard.service";
 
 @Component({
     selector: 'app-items-list',
@@ -18,7 +19,8 @@ export class ItemsListComponent implements OnInit {
 
     constructor(private cartService: CartService,
                 private authService: AuthService,
-                private toastService: NbToastrService) {
+                private toastService: NbToastrService,
+                public authGuard: AuthGuardService) {
         this.authService.currentUser.subscribe(
             (user) => this.user = user
         )
@@ -30,10 +32,12 @@ export class ItemsListComponent implements OnInit {
 
 
     removeProduct(id: string) {
-        this.loading = true;
         if (!this.user) {
             return ;
         }
+
+        this.loading = true;
+
         this.cartService.removeCartItem(this.user.id, id).subscribe(
             () => {
                 this.toastService.success('', 'Product has been removed from your cart!');
@@ -45,6 +49,25 @@ export class ItemsListComponent implements OnInit {
                 this.loading = false;
             }
         );
+    }
+
+    updateQuantity(product: CartProduct) {
+        if (!this.user || product.quantity < 1) {
+            return ;
+        }
+
+        this.loading = true;
+
+        this.cartService.modifyItemQuantity(this.user.id, product.id, {quantity: product.quantity}).subscribe(
+            () => {
+                this.fetchCart();
+                this.loading = false;
+            },
+            () => {
+                this.toastService.danger('Something went wrong!', 'Please try again.');
+                this.loading = false;
+            }
+        )
     }
 
     private fetchCart() {
@@ -60,6 +83,5 @@ export class ItemsListComponent implements OnInit {
                 }
             );
         }
-
     }
 }

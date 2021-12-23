@@ -3,6 +3,10 @@ export interface AddCartItemRequest {
     quantity: number
 }
 
+export interface ModifyCartItemQuantityRequest {
+    quantity: number
+}
+
 export interface CartInfo {
     id: number,
     UserId: number,
@@ -17,7 +21,7 @@ export interface CartProduct {
     imageUrl: string,
     cartId: string,
     productId: string,
-    quantity: string
+    quantity: number
 }
 
 export interface CartResponse {

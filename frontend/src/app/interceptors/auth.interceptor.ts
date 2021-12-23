@@ -28,6 +28,10 @@ export class AuthInterceptor implements HttpInterceptor {
             this.router.navigate(['/404']);
             return of(err.message);
         }
+        if (err.status === 401) {
+            this.router.navigate(['/auth/login']);
+            return of(err.message);
+        }
         return throwError(err);
     }
 }

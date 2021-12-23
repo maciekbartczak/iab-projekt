@@ -98,6 +98,41 @@ class CartItemService
         }
     }
 
+    public function modifyItemQuantity($item_id, $user_id, $item_quantity) {
+        try {
+            $item = $this->getCartItemById($item_id);
+            if (!$item) {
+                return false;
+            }
+
+            $statement = $this->db->prepare('SELECT * FROM ShoppingCart WHERE id = :id');
+            $statement->bindParam(':id', $item->cartId);
+            $statement->execute();
+            $cart = $statement->fetchObject('ShoppingCart');
+
+            if ($cart->UserId != $user_id) {
+                return false;
+            }
+
+            $statement = $this->db->prepare('UPDATE CartItem SET quantity = :quantity WHERE id = :id');
+            $statement->bindParam(':quantity', $item_quantity);
+            $statement->bindParam(':id', $item_id);
+            $statement->execute();
+
+            $product = $this->product_service->getProductById($item->productId);
+            $new_total = $cart->total - ($product->price * $item->quantity) + ($product->price * $item_quantity);
+
+            $statement = $this->db->prepare('UPDATE ShoppingCart SET total = :total WHERE id = :id');
+            $statement->bindParam(':total', $new_total);
+            $statement->bindParam(':id', $item->cartId);
+            $statement->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            exit($e);
+        }
+    }
+
     public function getAllCartItems($cart_id)
     {
         try {

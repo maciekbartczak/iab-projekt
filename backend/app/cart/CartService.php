@@ -25,6 +25,10 @@ class CartService
         return $this->cart_item_service->removeCartItem($item_id, $user_id);
     }
 
+    public function modifyItemQuantity($item_id, $user_id, $quantity) {
+        return $this->cart_item_service->modifyItemQuantity($item_id, $user_id, $quantity);
+    }
+
     public function getCartByUserId($user_id)
     {
         try {

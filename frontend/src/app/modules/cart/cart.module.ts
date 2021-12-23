@@ -7,11 +7,12 @@ import { ItemsListComponent } from './items-list/items-list.component';
 import {
     NbButtonModule,
     NbCardModule,
-    NbIconModule,
+    NbIconModule, NbInputModule,
     NbLayoutModule,
     NbListModule,
     NbSpinnerModule
 } from "@nebular/theme";
+import { FormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -27,7 +28,9 @@ import {
         NbListModule,
         NbButtonModule,
         NbIconModule,
-        NbSpinnerModule
+        NbSpinnerModule,
+        NbInputModule,
+        FormsModule
     ]
 })
 export class CartModule { }

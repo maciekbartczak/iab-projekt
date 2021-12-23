@@ -72,3 +72,29 @@ Router::delete('/api/user/([0-9]*)/cart/item/([0-9]*)', function (Request $req, 
     }
     $res->send();
 });
+
+Router::put('/api/user/([0-9]*)/cart/item/([0-9]*)', function (Request $req, Response $res) {
+    $cart_service = new CartService();
+
+    $user_id = $req->params[0];
+    $item_id = $req->params[1];
+    $item_quantity = $req->get_param('quantity');
+
+    if(!$user_id || !$item_id || !$item_quantity || $item_quantity < 1)
+    {
+        $res->status(HTTP_STATUS::BAD_REQUEST)->body()->send();
+        return;
+    }
+
+    if(!AuthService::authorizeUserFromTokenWithId($user_id))
+    {
+        return;
+    }
+
+    if (!$cart_service->modifyItemQuantity($item_id, $user_id, $item_quantity))
+    {
+        $res->status(HTTP_STATUS::BAD_REQUEST)->send();
+        return;
+    }
+    $res->send();
+});
