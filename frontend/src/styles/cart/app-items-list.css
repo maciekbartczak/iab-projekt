@@ -27,8 +27,15 @@ app-items-list .product-name {
     width: 60%;
 }
 
-app-items-list .product-price {
+app-items-list .product-price-quantity-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     width: 30%;
+}
+
+app-items-list .product-quantity {
+    margin-left: 1rem;
 }
 
 app-items-list .remove-product-button {
