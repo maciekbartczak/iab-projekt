@@ -10,6 +10,7 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        // TODO: notLoggedInGuard
         path: 'auth',
         loadChildren: () =>
             import('./modules/auth/auth.module').then(m => m.AuthModule)
@@ -29,6 +30,12 @@ const routes: Routes = [
         path: 'cart',
         loadChildren: () =>
             import('./modules/cart/cart.module').then(m => m.CartModule),
+        canLoad: [AuthGuard]
+    },
+    {
+        path: 'order',
+        loadChildren: () =>
+            import('./modules/order/order.module').then(m => m.OrderModule),
         canLoad: [AuthGuard]
     },
     {path: '404', component: NotFoundComponent},

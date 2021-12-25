@@ -15,7 +15,8 @@ export class AppComponent implements OnInit {
     public user?: User;
     menuItems = [
         {title: 'Profile'},
-        {title: 'Logout'}
+        {title: 'Orders'},
+        {title: 'Logout'},
     ];
 
     constructor(public authService: AuthService,
@@ -38,6 +39,9 @@ export class AppComponent implements OnInit {
                 switch (title) {
                     case 'Profile':
                         this.router.navigate([`/user/${this.user?.id}/profile`])
+                        break;
+                    case 'Orders':
+                        this.router.navigate(['/order']);
                         break;
                     case 'Logout':
                         this.logout();

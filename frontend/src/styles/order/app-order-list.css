@@ -1,0 +1,41 @@
+app-order-list nb-layout-column {
+    display: flex;
+    justify-content: center;
+}
+
+app-order-list .order-card-header {
+    text-align: center;
+}
+
+app-order-list .order-card {
+    width: 98%;
+}
+
+app-order-list .order-placed-at {
+    margin-left: 2rem;
+}
+
+app-order-list .product-image {
+    max-width: 8%;
+    height: auto;
+}
+
+app-order-list .order-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+app-order-list .product-name {
+    width: 82%;
+}
+
+app-order-list .order-total {
+    font-weight: bold;
+}
+
+app-order-list .order-total-label {
+    width: 90%;
+    text-align: right;
+    font-weight: bold;
+}
