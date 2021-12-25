@@ -69,4 +69,14 @@ class CartService
             exit($e);
         }
     }
+
+    public function clearCart($cart_id) {
+        try {
+            $statement = $this->db->prepare('UPDATE ShoppingCart SET total = 0 WHERE id = :cartId');
+            $statement->bindParam(':cartId', $cart_id);
+            $statement->execute();
+        } catch (PDOException $e) {
+            exit($e);
+        }
+    }
 }

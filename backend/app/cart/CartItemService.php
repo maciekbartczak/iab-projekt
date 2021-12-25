@@ -34,7 +34,6 @@ class CartItemService
                 $new_quantity = $cart_item->quantity + $quantity;
                 $statement->bindParam(':quantity', $new_quantity);
                 $statement->bindParam(':id', $cart_item->id);
-                $statement->execute();
             } else
             {
                 $statement = $this->db->prepare('INSERT INTO CartItem (cartId, productId, quantity) 
@@ -42,8 +41,8 @@ class CartItemService
                 $statement->bindParam(':cartId', $cart_id);
                 $statement->bindParam(':productId', $product_id);
                 $statement->bindParam(':quantity', $quantity);
-                $statement->execute();
             }
+            $statement->execute();
 
             $statement = $this->db->prepare('SELECT * FROM ShoppingCart WHERE id = :id');
             $statement->bindParam(':id', $cart_id);
@@ -165,6 +164,17 @@ class CartItemService
             exit($e);
         }
         return null;
+    }
+
+    public function deleteAllCartItems($cart_id)
+    {
+        try {
+            $statement = $this->db->prepare('DELETE FROM CartItem WHERE cartId = :cartId');
+            $statement->bindParam('cartId', $cart_id);
+            $statement->execute();
+        } catch (PDOException $e) {
+            exit($e);
+        }
     }
 
     private function getCartItemById($item_id)
