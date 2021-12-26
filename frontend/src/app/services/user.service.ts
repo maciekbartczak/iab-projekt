@@ -15,8 +15,8 @@ export class UserService {
         return this.http.get<UserProfileResponse>(`api/user/${userId}/profile`);
     }
 
-    public getUserAddresses(userId: string): Observable<UserAddressResponse> {
-        return this.http.get<UserAddressResponse>(`api/user/${userId}/address`);
+    public getUserAddresses(userId: number): Observable<UserAddressResponse[]> {
+        return this.http.get<UserAddressResponse[]>(`api/user/${userId}/address`);
     }
 
     public addUserAddress(userId: string, address: CreateUserAddressRequest) {

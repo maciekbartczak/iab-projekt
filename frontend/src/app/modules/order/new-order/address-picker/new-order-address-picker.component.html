@@ -1,0 +1,41 @@
+<div class="address-picker-wrapper">
+    <nb-card class="address-card" *ngFor="let address of addresses; let i = index">
+        <nb-card-header class="address-card-header">
+            <h6 *ngIf="index; else noIndex">Address {{ index + 1 }}</h6>
+            <ng-template #noIndex>
+                <h6 >Address {{ i + 1 }}</h6>
+            </ng-template>
+            <nb-radio-group *ngIf="!disablePicker">
+                <nb-radio [value]="address" [(ngModel)]="selectedAddress" ngDefaultControl
+                          (ngModelChange)="addressChanged.emit({address: address, index: i})"></nb-radio>
+            </nb-radio-group>
+        </nb-card-header>
+        <nb-card-body>
+            <div>
+                <span>Address line 1: </span>
+                <span>{{ address.addressLine1 }}</span>
+            </div>
+            <div *ngIf="address.addressLine2">
+                <span>Address line 2: </span>
+                <span>{{ address.addressLine2 }}</span>
+            </div>
+            <div>
+                <span>City: </span>
+                <span>{{ address.city }}</span>
+            </div>
+            <div>
+                <span>Postal code: </span>
+                <span>{{ address.postalCode }}</span>
+            </div>
+            <div>
+                <span>Country: </span>
+                <span>{{ address.country }}</span>
+            </div>
+            <div>
+                <span>Phone number:</span>
+                <span>{{ address.phoneNumber }}</span>
+            </div>
+        </nb-card-body>
+    </nb-card>
+</div>
+

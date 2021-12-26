@@ -9,7 +9,7 @@
                     <span class="product-name">{{product.name}}</span>
                     <span class="product-price-quantity-wrapper">
                         <span class="product-price">{{product.price | currency: 'PLN'}}</span>
-                        <input class="product-quantity" nbInput type="number" value="1" min="1" max="99" class="product-quantity"
+                        <input class="product-quantity" nbInput type="number" value="1" min="1" max="99"
                                [(ngModel)]="product.quantity"
                                (ngModelChange)="updateQuantity(product)">
                     </span>
@@ -21,7 +21,11 @@
                 <nb-list-item class="cart-summary">
                     <span class="cart-summary-total-label">Total: </span>
                     <span class="cart-summary-total-value">{{cart.cartInfo.total | currency:'PLN'}}</span>
-                    <span class="empty-col"></span>
+                    <span class="empty-col">
+                        <a nbButton status="primary" routerLink="/order/new" [state]="{cart: cart}" *ngIf="cart.products">
+                            Place order
+                        </a>
+                    </span>
                 </nb-list-item>
             </nb-list>
         </nb-card-body>

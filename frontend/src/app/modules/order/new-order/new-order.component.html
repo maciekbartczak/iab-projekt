@@ -1,1 +1,46 @@
-<p>new-order works!</p>
+<nb-layout-column>
+    <nb-card class="order-card">
+        <nb-card-header class="order-card-header">
+            <h1>Place a new order</h1>
+        </nb-card-header>
+        <nb-card-body class="order-card-body">
+            <nb-stepper linear="true" disableStepNavigation="true">
+                <nb-step label="Shipping">
+                    <app-new-order-address-picker [addresses]="userAddress" (addressChanged)="changeSelectedAddress($event)"></app-new-order-address-picker>
+                    <div class="nav-button-wrapper">
+                        <button nbButton nbStepperNext [disabled]="!selectedAddress">Next</button>
+                    </div>
+                </nb-step>
+                <nb-step label="Summary">
+                    <div class="summary-items" *ngIf="cart">
+                        <h6>Order items:</h6>
+                        <nb-list>
+                            <nb-list-item *ngFor="let item of cart.products">
+                                <span class="summary-items-name">
+                                    {{item.name}}
+                                </span>
+                                <span class="summary-items-price">
+                                    {{item.price | currency: 'PLN'}} x {{item.quantity}}
+                                </span>
+                            </nb-list-item>
+                            <nb-list-item class="summary-total-wrapper">
+                                <span class="summary-total-label">Total:&nbsp;</span>
+                                <span class="summary-total-amount">{{ cart.cartInfo.total | currency: 'PLN' }}</span>
+                            </nb-list-item>
+                        </nb-list>
+                    </div>
+                    <div class="ship-to-wrapper">
+                        <h6>Ship to:</h6>
+                        <app-new-order-address-picker [addresses]="selectedAddressAsArray()" [disablePicker]="true"
+                                                      [index]="selectedAddressIndex">
+                        </app-new-order-address-picker>
+                    </div>
+                    <div class="nav-button-wrapper">
+                        <button nbButton nbStepperPrevious>Previous</button>
+                        <button nbButton status="primary" (click)="placeOrder()">Place order</button>
+                    </div>
+                </nb-step>
+            </nb-stepper>
+        </nb-card-body>
+    </nb-card>
+</nb-layout-column>

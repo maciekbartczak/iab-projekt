@@ -4,13 +4,23 @@ import { CommonModule } from '@angular/common';
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderListComponent } from './order-list/order-list.component';
 import { NewOrderComponent } from './new-order/new-order.component';
-import { NbAccordionModule, NbCardModule, NbLayoutModule, NbListModule } from "@nebular/theme";
+import {
+    NbAccordionModule, NbButtonModule,
+    NbCardModule,
+    NbLayoutModule,
+    NbListModule,
+    NbRadioModule,
+    NbStepperModule
+} from "@nebular/theme";
+import { NewOrderAddressPickerComponent } from './new-order/address-picker/new-order-address-picker.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [
     OrderListComponent,
-    NewOrderComponent
+    NewOrderComponent,
+    NewOrderAddressPickerComponent
   ],
     imports: [
         CommonModule,
@@ -18,7 +28,11 @@ import { NbAccordionModule, NbCardModule, NbLayoutModule, NbListModule } from "@
         NbLayoutModule,
         NbCardModule,
         NbAccordionModule,
-        NbListModule
+        NbListModule,
+        NbStepperModule,
+        NbRadioModule,
+        FormsModule,
+        NbButtonModule
     ]
 })
 export class OrderModule { }
