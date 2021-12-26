@@ -1,0 +1,22 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { CreateOrderRequest, OrderInfo } from "../models/order.model";
+
+@Injectable({
+    providedIn: 'root'
+})
+export class OrderService {
+
+    constructor(private http: HttpClient) {
+    }
+
+    getAllOrders(userId: number): Observable<OrderInfo[]> {
+        return this.http.get<OrderInfo[]>(`api/user/${userId}/orders`);
+    }
+
+    placeOrder(userId: number, body: CreateOrderRequest) {
+        return this.http.post(`api/user/${userId}/order`, body);
+    }
+
+}

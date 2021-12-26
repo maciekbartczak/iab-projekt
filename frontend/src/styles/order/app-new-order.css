@@ -1,0 +1,63 @@
+app-new-order nb-layout-column {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+app-new-order .order-card {
+    width: 95%;
+}
+
+app-new-order .order-card-header {
+    text-align: center;
+}
+
+app-new-order-address-picker .address-picker-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+app-new-order-address-picker .address-picker-wrapper {
+    display: flex;
+}
+
+app-new-order-address-picker .address-picker-wrapper > :not(:last-child) {
+    margin-right: 2rem;
+}
+
+
+app-new-order-address-picker .address-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+app-new-order-address-picker nb-radio {
+    max-width: 20px;
+}
+
+app-new-order .nav-button-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+app-new-order .summary-items-name {
+    width: 50%;
+}
+
+app-new-order .summary-total-wrapper {
+    font-weight: bold;
+}
+
+app-new-order .summary-total-label {
+    width: 50%;
+    text-align: right;
+}
+
+app-new-order .nav-button-wrapper > :not(:last-child) {
+    margin-right: 2rem;
+}

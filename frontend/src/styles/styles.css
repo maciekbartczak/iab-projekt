@@ -5,6 +5,8 @@
 @import "product/app-product-table.css";
 @import "product/app-product-list.css";
 @import "cart/app-items-list.css";
+@import "order/app-order-list.css";
+@import "order/app-new-order.css";
 
 * {
   box-sizing: border-box;

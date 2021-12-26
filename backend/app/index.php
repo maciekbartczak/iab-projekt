@@ -15,6 +15,7 @@ require_once __DIR__ . '/auth/authController.php';
 require_once __DIR__ . '/user/userController.php';
 require_once __DIR__ . '/product/productController.php';
 require_once __DIR__ . '/cart/cartController.php';
+require_once __DIR__ . '/order/orderController.php';
 
 if (!$GLOBALS['route_matched']) {
     $res = new Response();
