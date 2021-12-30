@@ -57,7 +57,6 @@ CREATE TABLE IF NOT EXISTS `Order` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
   `UserId` int NOT NULL,
   `addressId` int NOT NULL,
-  `paymentId` int NOT NULL,
   `statusId` int NOT NULL,
   `total` decimal NOT NULL,
   `placedAt` timestamp NOT NULL
@@ -71,15 +70,9 @@ CREATE TABLE IF NOT EXISTS `OrderItem` (
   `quantity` int NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS `PaymentDetails` (
-  `id` int AUTO_INCREMENT PRIMARY KEY,
-  `paymentType` enum('transfer') NOT NULL,
-  `status` enum('in_progress', 'finished') NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS `StatusDetails` (
   `id` int AUTO_INCREMENT PRIMARY KEY,
-  `status` enum('new', 'in_shipping', 'finished') NOT NULL
+  `status` enum('new', 'processing', 'in_shipping', 'finished') NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `ProductCategories` (
@@ -97,7 +90,6 @@ ALTER TABLE `CartItem` ADD FOREIGN KEY (`productId`) REFERENCES `Product` (`id`)
 
 ALTER TABLE `Order` ADD FOREIGN KEY (`UserId`) REFERENCES `User` (`id`);
 
-ALTER TABLE `Order` ADD FOREIGN KEY (`paymentId`) REFERENCES `PaymentDetails` (`id`);
 
 ALTER TABLE `Order` ADD FOREIGN KEY (`statusId`) REFERENCES `StatusDetails` (`id`);
 
@@ -144,10 +136,8 @@ INSERT INTO ShoppingCart (UserId, total) VALUES (1, 0);
 INSERT INTO ShoppingCart (UserId, total) VALUES (2, 0);
 INSERT INTO ShoppingCart (UserId, total) VALUES (3, 0);
 
-INSERT INTO PaymentDetails (paymentType, status) VALUES ('transfer', 'in_progress');
-INSERT INTO PaymentDetails (paymentType, status) VALUES ('transfer', 'finished');
-
 INSERT INTO StatusDetails (status) VALUES ('new');
+INSERT INTO StatusDetails (status) VALUES ('processing');
 INSERT INTO StatusDetails (status) VALUES ('in_shipping');
 INSERT INTO StatusDetails (status) VALUES ('finished');
 

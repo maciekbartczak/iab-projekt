@@ -5,10 +5,9 @@ export interface CreateOrderRequest {
 
 export interface Order {
     id: number,
-    UserId: number,
     addressId: number,
-    paymentId: number,
-    statusId: number,
+    orderStatus: OrderStatus,
+    paymentType: string,
     total: number,
     placedAt: Date
 }
@@ -27,3 +26,5 @@ export interface OrderInfo {
     order: Order,
     items: OrderItem[];
 }
+
+export type OrderStatus = 'new' | 'processing' | 'in_shipping' | 'finished';

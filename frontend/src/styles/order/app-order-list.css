@@ -11,9 +11,21 @@ app-order-list .order-card {
     width: 98%;
 }
 
-app-order-list .order-placed-at {
-    margin-left: 2rem;
+app-order-list  .order-info-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
+
+app-order-list .order-info > :not(:last-child){
+    margin-right: 2rem;
+}
+
+app-order-list .order-payment-button {
+    margin-right: 2rem;
+}
+
 
 app-order-list .product-image {
     max-width: 8%;
