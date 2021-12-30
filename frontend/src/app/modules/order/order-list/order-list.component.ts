@@ -13,6 +13,7 @@ export class OrderListComponent implements OnInit {
 
     orders: OrderInfo[] = [];
     user?: User;
+    loading = false;
 
     constructor(private orderService: OrderService,
                 private authService: AuthService,
@@ -23,12 +24,32 @@ export class OrderListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+       this.fetchOrders();
+    }
+
+    makePayment(event: Event, orderId: number) {
+        event.stopPropagation();
         if (this.user) {
-            this.orderService.getAllOrders(this.user?.id).subscribe(
-                (response) => this.orders = response,
-                () => this.toastService.danger('Please try again.', 'Something went wrong!')
+            this.loading = true;
+            this.orderService.makePayment(this.user.id, orderId).subscribe(
+                () => {
+                    this.toastService.success('Payment finished successfully.', 'Success!')
+                    this.fetchOrders();
+                },
+                () => this.toastService.danger('Please try again.', 'Something went wrong!'),
+                () => this.loading = false
             )
         }
     }
 
+    private fetchOrders() {
+        if (this.user) {
+            this.loading = true;
+            this.orderService.getAllOrders(this.user?.id).subscribe(
+                (response) => this.orders = response,
+                () => this.toastService.danger('Please try again.', 'Something went wrong!'),
+                () => this.loading = false
+            )
+        }
+    }
 }

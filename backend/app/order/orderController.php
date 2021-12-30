@@ -42,3 +42,24 @@ Router::get('/api/user/([0-9]*)/orders', function (Request $req, Response $res) 
     $orders = $order_service->getAllOrders($user_id);
     $res->body($orders)->send();
 });
+
+Router::put('/api/user/([0-9]*)/order/([0-9]*)/pay', function (Request $req, Response $res) {
+    $order_service = new OrderService();
+
+    $user_id = $req->params[0];
+    $order_id = $req->params[1];
+
+    if(!$user_id || !$order_id)
+    {
+        $res->status(HTTP_STATUS::BAD_REQUEST)->send();
+        return;
+    }
+
+    if(!AuthService::authorizeUserFromTokenWithId($user_id))
+    {
+        return;
+    }
+
+    $order_service->payForOrder($user_id, $order_id);
+    $res->send();
+});

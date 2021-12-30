@@ -9,18 +9,20 @@ import {
     NbCardModule,
     NbLayoutModule,
     NbListModule,
-    NbRadioModule,
+    NbRadioModule, NbSpinnerModule,
     NbStepperModule
 } from "@nebular/theme";
 import { NewOrderAddressPickerComponent } from './new-order/address-picker/new-order-address-picker.component';
 import {FormsModule} from "@angular/forms";
+import { PrettyOrderStatusPipe } from './pipes/pretty-order-status.pipe';
 
 
 @NgModule({
   declarations: [
     OrderListComponent,
     NewOrderComponent,
-    NewOrderAddressPickerComponent
+    NewOrderAddressPickerComponent,
+    PrettyOrderStatusPipe
   ],
     imports: [
         CommonModule,
@@ -32,7 +34,8 @@ import {FormsModule} from "@angular/forms";
         NbStepperModule,
         NbRadioModule,
         FormsModule,
-        NbButtonModule
+        NbButtonModule,
+        NbSpinnerModule
     ]
 })
 export class OrderModule { }

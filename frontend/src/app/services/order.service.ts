@@ -19,4 +19,8 @@ export class OrderService {
         return this.http.post(`api/user/${userId}/order`, body);
     }
 
+    makePayment(userId: number, orderId: number) {
+        return this.http.put(`api/user/${userId}/order/${orderId}/pay`, {});
+    }
+
 }

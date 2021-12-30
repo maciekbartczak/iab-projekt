@@ -58,7 +58,8 @@ class OrderService
         try {
             $full_orders = array();
 
-            $statement = $this->db->prepare('SELECT * FROM `Order` WHERE UserId = :userId');
+            $statement = $this->db->prepare('SELECT O.id, O.addressId, O.total, O.placedAt, SD.status AS orderStatus
+                                            FROM `Order` AS O JOIN StatusDetails SD on O.statusId = SD.id WHERE UserId = :userId');
             $statement->bindParam(':userId', $user_id);
             $statement->execute();
             $orders = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -78,5 +79,17 @@ class OrderService
             return null;
         }
 
+    }
+
+    public function payForOrder($user_id, $order_id): bool
+    {
+        try {
+            $statement = $this->db->prepare('UPDATE `Order` SET statusId = 2 WHERE UserId = :UserId AND id = :id');
+            $statement->bindParam(':UserId', $user_id);
+            $statement->bindParam(':id', $order_id);
+            return $statement->execute();
+        } catch (PDOException) {
+            return false;
+        }
     }
 }
