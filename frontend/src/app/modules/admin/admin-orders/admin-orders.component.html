@@ -1,0 +1,14 @@
+<nb-layout-column>
+    <nb-card>
+        <nb-card-header>
+            <h1>All orders</h1>
+        </nb-card-header>
+        <nb-card-body>
+            <nb-list>
+                <nb-list-item *ngFor="let order of orders">
+                    {{order | json}}
+                </nb-list-item>
+            </nb-list>
+        </nb-card-body>
+    </nb-card>
+</nb-layout-column>

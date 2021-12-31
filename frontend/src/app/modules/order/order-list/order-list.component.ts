@@ -45,7 +45,7 @@ export class OrderListComponent implements OnInit {
     private fetchOrders() {
         if (this.user) {
             this.loading = true;
-            this.orderService.getAllOrders(this.user?.id).subscribe(
+            this.orderService.getAllUserOrders(this.user?.id).subscribe(
                 (response) => this.orders = response,
                 () => this.toastService.danger('Please try again.', 'Something went wrong!'),
                 () => this.loading = false

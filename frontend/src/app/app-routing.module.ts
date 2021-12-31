@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardService as AuthGuard } from "./services/auth-guard.service";
 import { NotFoundComponent } from "./common/not-found/not-found.component";
+import { RoleGuard } from "./services/role-guard.service";
 
 const routes: Routes = [
     {
@@ -37,6 +38,11 @@ const routes: Routes = [
         loadChildren: () =>
             import('./modules/order/order.module').then(m => m.OrderModule),
         canLoad: [AuthGuard]
+    },
+    {
+        path: 'admin',
+        loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule),
+        canLoad: [AuthGuard, RoleGuard]
     },
     {path: '404', component: NotFoundComponent},
     {path: '**', redirectTo: '/404'}

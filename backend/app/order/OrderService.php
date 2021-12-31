@@ -53,7 +53,7 @@ class OrderService
         }
     }
 
-    public function getAllOrders($user_id): ?array
+    public function getAllUserOrders($user_id): ?array
     {
         try {
             $full_orders = array();
@@ -84,12 +84,37 @@ class OrderService
     public function payForOrder($user_id, $order_id): bool
     {
         try {
-            $statement = $this->db->prepare('UPDATE `Order` SET statusId = 2 WHERE UserId = :UserId AND id = :id');
+            $statement = $this->db->prepare('UPDATE `Order` SET statusId = 2 WHERE UserId = :UserId AND id = :id AND statusId = 1');
             $statement->bindParam(':UserId', $user_id);
             $statement->bindParam(':id', $order_id);
             return $statement->execute();
         } catch (PDOException) {
             return false;
+        }
+    }
+
+    public function getAllOrders() {
+        try {
+            $full_orders = array();
+
+            $statement = $this->db->prepare('SELECT O.id, O.addressId, O.total, O.placedAt, SD.status AS orderStatus
+                                            FROM `Order` AS O JOIN StatusDetails SD on O.statusId = SD.id');
+            $statement->execute();
+            $orders = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($orders as $order) {
+                $statement = $this->db->prepare('SELECT oi.id, oi.orderId, oi.productId, oi.price, oi.quantity, p.name, p.imageUrl
+                                                FROM OrderItem AS oi JOIN Product AS p ON p.id = oi.productId WHERE orderId = :orderId');
+                $statement->bindParam(':orderId', $order['id']);
+                $statement->execute();
+                $items = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $full_order = ['order' => $order, 'items' => $items];
+                array_push($full_orders, $full_order);
+            }
+
+            return $full_orders;
+        } catch (PDOException) {
+            return null;
         }
     }
 }

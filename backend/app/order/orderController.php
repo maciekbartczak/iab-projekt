@@ -39,7 +39,7 @@ Router::get('/api/user/([0-9]*)/orders', function (Request $req, Response $res) 
         return;
     }
 
-    $orders = $order_service->getAllOrders($user_id);
+    $orders = $order_service->getAllUserOrders($user_id);
     $res->body($orders)->send();
 });
 
