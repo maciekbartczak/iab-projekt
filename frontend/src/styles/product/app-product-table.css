@@ -52,3 +52,7 @@ app-product-list .add-to-cart-wrapper {
 app-product-list .product-quantity {
     max-width: 75px !important;
 }
+
+app-product-table .product-card {
+    height: 100%;
+}
