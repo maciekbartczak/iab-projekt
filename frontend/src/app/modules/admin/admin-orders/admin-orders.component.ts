@@ -10,14 +10,37 @@ import { OrderInfo } from "../../../models/order.model";
 export class AdminOrdersComponent implements OnInit {
 
     orders?: OrderInfo[];
+    loading = false;
 
     constructor(private orderService: OrderService) {
     }
 
     ngOnInit(): void {
-        this.orderService.getAllOrders().subscribe(
-            (response) => this.orders = response
+        this.fetchOrders();
+    }
+
+    shipOrder($event: Event, id: number) {
+        $event.stopPropagation();
+        this.orderService.shipOrder(id).subscribe(
+            () => this.fetchOrders()
         )
     }
 
+
+    finishShipping($event: Event, id: number) {
+        $event.stopPropagation();
+        this.orderService.finishShipping(id).subscribe(
+            () => this.fetchOrders()
+        )
+    }
+
+    private fetchOrders() {
+        this.loading = true;
+        this.orderService.getAllOrders().subscribe(
+            (response) => this.orders = response,
+            (err) => console.log(err),
+            () => this.loading = false
+
+        )
+    }
 }

@@ -18,12 +18,15 @@ import { PrettyOrderStatusPipe } from './pipes/pretty-order-status.pipe';
 
 
 @NgModule({
-  declarations: [
-    OrderListComponent,
-    NewOrderComponent,
-    NewOrderAddressPickerComponent,
-    PrettyOrderStatusPipe
-  ],
+    declarations: [
+        OrderListComponent,
+        NewOrderComponent,
+        NewOrderAddressPickerComponent,
+        PrettyOrderStatusPipe
+    ],
+    exports: [
+        PrettyOrderStatusPipe
+    ],
     imports: [
         CommonModule,
         OrderRoutingModule,

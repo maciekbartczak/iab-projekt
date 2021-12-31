@@ -117,4 +117,15 @@ class OrderService
             return null;
         }
     }
+
+    public function changeOrderStatus($order_id, $new_status) {
+        try {
+            $statement = $this->db->prepare('UPDATE `Order` SET statusId = :status WHERE id = :id');
+            $statement->bindParam(':id', $order_id);
+            $statement->bindParam(':status', $new_status);
+            return $statement->execute();
+        } catch (PDOException) {
+            return false;
+        }
+    }
 }

@@ -27,4 +27,11 @@ export class OrderService {
         return this.http.get<OrderInfo[]>('api/admin/orders');
     }
 
+    shipOrder(id: number) {
+        return this.http.put(`api/admin/order/${id}/ship`, {});
+    }
+
+    finishShipping(id: number) {
+        return this.http.put(`api/admin/order/${id}/finish`, {});
+    }
 }

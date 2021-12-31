@@ -1,0 +1,53 @@
+app-admin-orders nb-layout-column {
+    display: flex;
+    justify-content: center;
+}
+
+app-admin-orders .order-card-header {
+    text-align: center;
+}
+
+app-admin-orders .order-card {
+    width: 98%;
+}
+
+app-admin-orders  .order-info-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+app-admin-orders .order-info > :not(:last-child){
+    margin-right: 2rem;
+}
+
+app-admin-orders .order-payment-button {
+    margin-right: 2rem;
+}
+
+
+app-admin-orders .product-image {
+    max-width: 8%;
+    height: auto;
+}
+
+app-admin-orders .order-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+app-admin-orders .product-name {
+    width: 82%;
+}
+
+app-admin-orders .order-total {
+    font-weight: bold;
+}
+
+app-admin-orders .order-total-label {
+    width: 90%;
+    text-align: right;
+    font-weight: bold;
+}
