@@ -11,13 +11,30 @@ class AuthService {
         $res = new Response();
         try {
             $token_data = JwtUtils::getDecodedJWT();
-        } catch (Exception $e) {
+        } catch (Exception) {
             $res->status(HTTP_STATUS::UNATHORIZED)->send();
             return false;
         }
 
         $auth_user_id = $token_data->userDetails->id;
         if ($auth_user_id != $user_id) {
+            $res->status(HTTP_STATUS::FORBIDDEN)->send();
+            return false;
+        }
+        return true;
+    }
+
+    public static function authorizeUserFromTokenWithRole($role): bool {
+        $res = new Response();
+        try {
+            $token_data = JwtUtils::getDecodedJWT();
+        } catch (Exception) {
+            $res->status(HTTP_STATUS::UNATHORIZED)->send();
+            return false;
+        }
+
+        $user_role = $token_data->userDetails->role;
+        if ($user_role != $role) {
             $res->status(HTTP_STATUS::FORBIDDEN)->send();
             return false;
         }

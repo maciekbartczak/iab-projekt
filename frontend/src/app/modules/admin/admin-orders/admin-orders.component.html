@@ -1,0 +1,50 @@
+<nb-layout-column>
+    <nb-card class="order-card" [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="giant">
+        <nb-card-header class="order-card-header">
+            <h1>Placed orders</h1>
+        </nb-card-header>
+        <nb-card-body>
+            <nb-accordion>
+                <nb-accordion-item *ngFor="let order of orders">
+                    <nb-accordion-item-header class="order-info-header">
+                        <div class="order-info">
+                            <span class="order-id">
+                                Order {{order.order.id}}
+                            </span>
+                            <span class="order-status">
+                                Status: {{order.order.orderStatus | prettyOrderStatus}}
+                            </span>
+                            <span class="order-placed-at">
+                                Placed at: {{order.order.placedAt | date: 'short'}}
+                            </span>
+                        </div>
+                        <button nbButton class="order-payment-button" status="primary" (click)="shipOrder($event, order.order.id)"
+                                *ngIf="order.order.orderStatus === 'processing'">
+                            Ship order
+                        </button>
+                        <button nbButton class="order-payment-button" status="primary" (click)="finishShipping($event, order.order.id)"
+                                *ngIf="order.order.orderStatus === 'in_shipping'">
+                            Finish shipping
+                        </button>
+                    </nb-accordion-item-header>
+                    <nb-accordion-item-body>
+                        <nb-list class="order-item-list">
+                            <nb-list-item *ngFor="let item of order.items" class="order-item">
+                                <img class="product-image" [src]="'http://localhost:8000/' + item.imageUrl"
+                                     alt="product-image">
+                                <span class="product-name">{{item.name}}</span>
+                                <span class="product-price">{{item.price | currency: 'PLN'}} x{{item.quantity}}</span>
+                            </nb-list-item>
+                            <nb-list-item class="order-total">
+                                <span class="order-total-label">Total:&nbsp;</span>
+                                <span class="order-total-amount">
+                                    {{order.order.total | currency:'PLN'}}
+                                </span>
+                            </nb-list-item>
+                        </nb-list>
+                    </nb-accordion-item-body>
+                </nb-accordion-item>
+            </nb-accordion>
+        </nb-card-body>
+    </nb-card>
+</nb-layout-column>

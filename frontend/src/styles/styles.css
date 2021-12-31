@@ -7,6 +7,7 @@
 @import "cart/app-items-list.css";
 @import "order/app-order-list.css";
 @import "order/app-new-order.css";
+@import "admin/app-admin-orders.css";
 
 * {
   box-sizing: border-box;

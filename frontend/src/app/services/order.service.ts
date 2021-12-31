@@ -11,7 +11,7 @@ export class OrderService {
     constructor(private http: HttpClient) {
     }
 
-    getAllOrders(userId: number): Observable<OrderInfo[]> {
+    getAllUserOrders(userId: number): Observable<OrderInfo[]> {
         return this.http.get<OrderInfo[]>(`api/user/${userId}/orders`);
     }
 
@@ -23,4 +23,15 @@ export class OrderService {
         return this.http.put(`api/user/${userId}/order/${orderId}/pay`, {});
     }
 
+    getAllOrders(): Observable<OrderInfo[]> {
+        return this.http.get<OrderInfo[]>('api/admin/orders');
+    }
+
+    shipOrder(id: number) {
+        return this.http.put(`api/admin/order/${id}/ship`, {});
+    }
+
+    finishShipping(id: number) {
+        return this.http.put(`api/admin/order/${id}/finish`, {});
+    }
 }

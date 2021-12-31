@@ -11,6 +11,9 @@
                     <nb-icon icon="shopping-cart"></nb-icon>
                     Cart
                 </a>
+                <a *ngIf="user && user.role !== 'USER'" nbButton routerLink="/admin/orders">
+                    Admin
+                </a>
             </div>
             <div class="auth-wrapper">
                 <div class="auth-links" *ngIf="!user">
