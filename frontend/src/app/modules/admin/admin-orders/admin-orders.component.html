@@ -5,7 +5,7 @@
         </nb-card-header>
         <nb-card-body>
             <nb-accordion>
-                <nb-accordion-item *ngFor="let order of orders">
+                <nb-accordion-item *ngFor="let order of orders; let i = index">
                     <nb-accordion-item-header class="order-info-header">
                         <div class="order-info">
                             <span class="order-id">
@@ -42,6 +42,11 @@
                                 </span>
                             </nb-list-item>
                         </nb-list>
+                        <div class="order-ship-to">
+                            <h6>Ship to:</h6>
+                            <app-new-order-address-picker *ngIf="orderAddress[i]" [addresses]="getOrderAddressAsArray(orderAddress[i])"
+                                                          [disablePicker]="true"></app-new-order-address-picker>
+                        </div>
                     </nb-accordion-item-body>
                 </nb-accordion-item>
             </nb-accordion>

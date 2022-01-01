@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderService } from "../../../services/order.service";
 import { OrderInfo } from "../../../models/order.model";
 import { AuthService } from "../../../services/auth.service";
-import { User } from "../../../models/user.model";
+import { User, UserAddressResponse } from "../../../models/user.model";
 import { NbToastrService } from "@nebular/theme";
 
 @Component({
@@ -12,6 +12,7 @@ import { NbToastrService } from "@nebular/theme";
 export class OrderListComponent implements OnInit {
 
     orders: OrderInfo[] = [];
+    orderAddress: UserAddressResponse[] = [];
     user?: User;
     loading = false;
 
@@ -24,7 +25,7 @@ export class OrderListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-       this.fetchOrders();
+        this.fetchOrders();
     }
 
     makePayment(event: Event, orderId: number) {
@@ -46,10 +47,27 @@ export class OrderListComponent implements OnInit {
         if (this.user) {
             this.loading = true;
             this.orderService.getAllUserOrders(this.user?.id).subscribe(
-                (response) => this.orders = response,
+                (response) => {
+                    this.orders = response;
+                    this.fetchOrdersAddress();
+                },
                 () => this.toastService.danger('Please try again.', 'Something went wrong!'),
                 () => this.loading = false
             )
         }
+    }
+
+    private fetchOrdersAddress() {
+        this.orders.forEach(order => {
+            if (this.user) {
+                this.orderService.getOrderAddress(this.user.id, order.order.id).subscribe(
+                    (response) => this.orderAddress.push(response)
+                )
+            }
+        })
+    }
+
+    getOrderAddressAsArray(address: UserAddressResponse): UserAddressResponse[] {
+        return [address];
     }
 }

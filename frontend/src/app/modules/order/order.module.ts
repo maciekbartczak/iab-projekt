@@ -25,7 +25,8 @@ import { PrettyOrderStatusPipe } from './pipes/pretty-order-status.pipe';
         PrettyOrderStatusPipe
     ],
     exports: [
-        PrettyOrderStatusPipe
+        PrettyOrderStatusPipe,
+        NewOrderAddressPickerComponent
     ],
     imports: [
         CommonModule,

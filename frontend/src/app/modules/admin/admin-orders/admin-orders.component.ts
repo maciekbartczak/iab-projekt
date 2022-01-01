@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from "../../../services/order.service";
 import { OrderInfo } from "../../../models/order.model";
+import { UserAddressResponse } from "../../../models/user.model";
 
 @Component({
     selector: 'app-admin-orders',
@@ -10,6 +11,7 @@ import { OrderInfo } from "../../../models/order.model";
 export class AdminOrdersComponent implements OnInit {
 
     orders?: OrderInfo[];
+    orderAddress: UserAddressResponse[] = [];
     loading = false;
 
     constructor(private orderService: OrderService) {
@@ -37,10 +39,26 @@ export class AdminOrdersComponent implements OnInit {
     private fetchOrders() {
         this.loading = true;
         this.orderService.getAllOrders().subscribe(
-            (response) => this.orders = response,
+            (response) => {
+                this.orders = response;
+                this.fetchOrdersAddress();
+            },
             (err) => console.log(err),
             () => this.loading = false
-
         )
+    }
+
+    private fetchOrdersAddress() {
+        if (this.orders) {
+            this.orders.forEach(order => {
+                this.orderService.getOrderAddressAdmin(order.order.id).subscribe(
+                    (response) => this.orderAddress.push(response)
+                )
+            })
+        }
+    }
+
+    getOrderAddressAsArray(address: UserAddressResponse): UserAddressResponse[] {
+        return [address];
     }
 }

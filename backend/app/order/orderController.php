@@ -78,7 +78,7 @@ Router::get('/api/user/([0-9]*)/order/([0-9]*)/address', function (Request $req,
 Router::get('/api/order/([0-9]*)/address', function (Request $req, Response $res) {
     $order_service = new OrderService();
 
-    $order_id = $req->params[1];
+    $order_id = $req->params[0];
 
     if (!$order_id) {
         $res->status(HTTP_STATUS::BAD_REQUEST)->send();
