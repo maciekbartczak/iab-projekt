@@ -22,9 +22,15 @@ class OrderService
     public function createNewOrder($user_id, $cart_id, $address_id): bool
     {
         try {
-            $statement = $this->db->prepare('INSERT INTO `Order` (UserId, addressId, paymentId, statusId, total, placedAt) VALUES (:UserId, :addressId, 1, 1, 0, CURRENT_TIMESTAMP())');
+            $statement = $this->db->prepare('INSERT INTO OrderAddress (UserId, addressLine1, addressLine2, city, postalCode, country, phoneNumber)
+                                            SELECT UserId, addressLine1, addressLine2, city, postalCode, country, phoneNumber FROM UserAddress WHERE id = :id');
+            $statement->bindParam(":id", $address_id);
+            $statement->execute();
+            $id = $this->db->lastInsertId();
+
+            $statement = $this->db->prepare('INSERT INTO `Order` (UserId, addressId, statusId, total, placedAt) VALUES (:UserId, :addressId, 1, 0, CURRENT_TIMESTAMP())');
             $statement->bindParam(":UserId", $user_id);
-            $statement->bindParam(":addressId", $address_id);
+            $statement->bindParam(":addressId", $id);
             $statement->execute();
             $order_id = $this->db->lastInsertId();
 
