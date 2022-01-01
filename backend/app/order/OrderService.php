@@ -134,4 +134,15 @@ class OrderService
             return false;
         }
     }
+
+    public function getOrderAddress($order_id) {
+        try {
+            $statement = $this->db->prepare('SELECT * FROM OrderAddress WHERE id = (SELECT addressId FROM `Order` WHERE id = :id)');
+            $statement->bindParam(':id', $order_id);
+            $statement->execute();
+            return $statement->fetchObject();
+        } catch (PDOException) {
+            return false;
+        }
+    }
 }
