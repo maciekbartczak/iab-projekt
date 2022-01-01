@@ -1,5 +1,7 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {UserAddressResponse} from "../../../../models/user.model";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { UserAddressResponse } from "../../../../models/user.model";
+import { AddAddressDialogComponent } from "../../../user/profile/addresses/add-address-dialog/add-address-dialog.component";
+import { NbDialogService } from "@nebular/theme";
 
 @Component({
     selector: 'app-new-order-address-picker',
@@ -24,7 +26,5 @@ export class NewOrderAddressPickerComponent {
 
     constructor() {
     }
-
-
 
 }

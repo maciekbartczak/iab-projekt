@@ -1,12 +1,18 @@
 <nb-layout-column>
-    <nb-card class="order-card">
+    <nb-card class="order-card" *ngIf="user">
         <nb-card-header class="order-card-header">
             <h1>Place a new order</h1>
         </nb-card-header>
         <nb-card-body class="order-card-body">
             <nb-stepper linear="true" disableStepNavigation="true">
                 <nb-step label="Shipping">
-                    <app-new-order-address-picker [addresses]="userAddress" (addressChanged)="changeSelectedAddress($event)"></app-new-order-address-picker>
+                    <app-new-order-address-picker [addresses]="userAddress"
+                                                  (addressChanged)="changeSelectedAddress($event)"></app-new-order-address-picker>
+                    <div class="add-new-address">
+                        <button nbButton status="primary" (click)="openAddAddressDialog()">
+                            Add new address<nb-icon icon="plus"></nb-icon>
+                        </button>
+                    </div>
                     <div class="nav-button-wrapper">
                         <button nbButton nbStepperNext [disabled]="!selectedAddress">Next</button>
                     </div>

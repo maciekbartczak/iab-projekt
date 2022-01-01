@@ -3,7 +3,7 @@
         <nb-card-header class="address-card-header">
             <h6 *ngIf="index; else noIndex">Address {{ index + 1 }}</h6>
             <ng-template #noIndex>
-                <h6 >Address {{ i + 1 }}</h6>
+                <h6>Address {{ i + 1 }}</h6>
             </ng-template>
             <nb-radio-group *ngIf="!disablePicker">
                 <nb-radio [value]="address" [(ngModel)]="selectedAddress" ngDefaultControl

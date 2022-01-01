@@ -6,14 +6,14 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { NewOrderComponent } from './new-order/new-order.component';
 import {
     NbAccordionModule, NbButtonModule,
-    NbCardModule,
+    NbCardModule, NbDialogModule, NbIconModule,
     NbLayoutModule,
     NbListModule,
     NbRadioModule, NbSpinnerModule,
     NbStepperModule
 } from "@nebular/theme";
 import { NewOrderAddressPickerComponent } from './new-order/address-picker/new-order-address-picker.component';
-import {FormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PrettyOrderStatusPipe } from './pipes/pretty-order-status.pipe';
 
 
@@ -37,8 +37,11 @@ import { PrettyOrderStatusPipe } from './pipes/pretty-order-status.pipe';
         NbStepperModule,
         NbRadioModule,
         FormsModule,
+        ReactiveFormsModule,
         NbButtonModule,
-        NbSpinnerModule
+        NbSpinnerModule,
+        NbIconModule,
+        NbDialogModule.forChild()
     ]
 })
 export class OrderModule { }

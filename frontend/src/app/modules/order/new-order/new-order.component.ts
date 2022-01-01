@@ -7,7 +7,8 @@ import {AuthService} from "../../../services/auth.service";
 import {UserService} from "../../../services/user.service";
 import {User, UserAddressResponse} from "../../../models/user.model";
 import {OrderService} from "../../../services/order.service";
-import {NbToastrService} from "@nebular/theme";
+import { NbDialogService, NbToastrService } from "@nebular/theme";
+import { AddAddressDialogComponent } from "../../user/profile/addresses/add-address-dialog/add-address-dialog.component";
 
 @Component({
     selector: 'app-new-order',
@@ -16,7 +17,7 @@ import {NbToastrService} from "@nebular/theme";
 export class NewOrderComponent implements OnInit {
     cart?: CartResponse;
     private state$?: Observable<object>;
-    private user?: User;
+    user?: User;
     userAddress?: UserAddressResponse[];
     selectedAddress?: UserAddressResponse;
     selectedAddressIndex?: number;
@@ -26,7 +27,8 @@ export class NewOrderComponent implements OnInit {
                 private userService: UserService,
                 private orderService: OrderService,
                 private toastService: NbToastrService,
-                private router: Router) {
+                private router: Router,
+                private dialogService: NbDialogService) {
     }
 
     ngOnInit(): void {
@@ -42,11 +44,7 @@ export class NewOrderComponent implements OnInit {
             (user) => this.user = user
         )
 
-        if (this.user) {
-            this.userService.getUserAddresses(this.user.id).subscribe(
-                (res) => this.userAddress = res
-            )
-        }
+        this.fetchAddress();
     }
 
 
@@ -76,5 +74,23 @@ export class NewOrderComponent implements OnInit {
                 this.toastService.danger('There was an error processing your order. Try again later.', 'Something went wrong!')
             }
         );
+    }
+
+    fetchAddress() {
+        if (this.user) {
+            this.userService.getUserAddresses(this.user.id).subscribe(
+                (res) => this.userAddress = res
+            )
+        }
+    }
+
+    openAddAddressDialog() {
+        if (this.user) {
+            this.dialogService.open(AddAddressDialogComponent, {
+                context: {
+                    userId: this.user.id.toString(),
+                },
+            }).onClose.subscribe(() => this.fetchAddress());
+        }
     }
 }
