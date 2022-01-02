@@ -6,3 +6,15 @@ app-product-list .pagination {
 app-product-list .pagination button:not(:last-child) {
     margin-right: 10px;
 }
+app-product-list .filter-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+
+app-product-list .category-filter {
+    width: 30%;
+}
