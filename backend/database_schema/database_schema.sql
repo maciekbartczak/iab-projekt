@@ -157,10 +157,13 @@ VALUES (3, 'admin', '$2y$10$ZS4jxTbECMfE.9Cz9QLLiO9ANM87enbtpKRvLiGa6RWx6DxwdAzI
         'rick@sanchez.com');
 
 INSERT INTO Category (id, name, description)
-VALUES (1, 'Notebook', 'Description');
+VALUES (1, 'Notebook', '');
 
 INSERT INTO Category (id, name, description)
-VALUES (2, 'Smartphone', 'Description');
+VALUES (2, 'Smartphone', '');
+
+INSERT INTO Category (id, name, description)
+VALUES (3, 'Smartwatch', '');
 
 INSERT INTO Product (id, name, description, price, imageUrl)
 VALUES (1, 'Apple MacBook Air M1/8GB/256/Mac OS Space Gray', '', 4600, 'product_images/macbook-air-space-gray.jpg');
@@ -186,6 +189,33 @@ INSERT INTO Product (id, name, description, price, imageUrl)
 VALUES (5, 'Apple iPhone 13 256GB Midnight', '', 4699, 'product_images/iphone-13-midnight.png');
 INSERT INTO ProductCategories
 VALUES (5, 2);
+
+INSERT INTO Product (id, name, description, price, imageUrl)
+VALUES (6, 'Apple iPhone 13 512GB Starlight', '', 5699, 'product_images/iphone-13-starlight.png');
+INSERT INTO ProductCategories
+VALUES (6, 2);
+
+INSERT INTO Product (id, name, description, price, imageUrl)
+VALUES (7, 'Apple iPhone 13 Mini 128GB Starlight', '', 3599, 'product_images/iphone-13-mini-starlight.png');
+INSERT INTO ProductCategories
+VALUES (7, 2);
+
+INSERT INTO Product (id, name, description, price, imageUrl)
+VALUES (8, 'Xiaomi Mi 11i 5G 8/256GB Celestial Silver', '', 2999, 'product_images/xiaomi-mi-11-celestail-silver.png');
+INSERT INTO ProductCategories
+VALUES (8, 2);
+
+INSERT INTO Product (id, name, description, price, imageUrl)
+VALUES (9, 'Garmin Fenix 6S PRO black Gorilla Glass OSM', '', 2499, 'product_images/garmin-fenix-6s-pro-black.png');
+INSERT INTO ProductCategories
+VALUES (9, 3);
+
+INSERT INTO Product (id, name, description, price, imageUrl)
+VALUES (10, 'Apple Watch 6 40/Silver Steel/White Sport LTE', '', 3199, 'product_images/apple-watch-6-40-silver-steel.png');
+INSERT INTO ProductCategories
+VALUES (10, 3);
+
+
 
 INSERT INTO ShoppingCart (UserId, total)
 VALUES (1, 0);
