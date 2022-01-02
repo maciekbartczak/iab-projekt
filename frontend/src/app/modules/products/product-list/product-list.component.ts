@@ -39,8 +39,9 @@ export class ProductListComponent implements OnInit {
        );
        this.filterChange.subscribe(
            (selected) => {
-               this.selectedCategories = selected
-               this.fetchPage()
+               this.selectedCategories = selected;
+               this.pageNumber = 1;
+               this.fetchPage();
            }
        );
     }
