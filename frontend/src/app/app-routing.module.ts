@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardService as AuthGuard } from "./services/auth-guard.service";
 import { NotFoundComponent } from "./common/not-found/not-found.component";
 import { RoleGuard } from "./services/role-guard.service";
+import {NotLoggedInGuard} from "./services/not-logged-in-guard.service";
 
 const routes: Routes = [
     {
@@ -11,10 +12,10 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        // TODO: notLoggedInGuard
         path: 'auth',
         loadChildren: () =>
-            import('./modules/auth/auth.module').then(m => m.AuthModule)
+            import('./modules/auth/auth.module').then(m => m.AuthModule),
+        canLoad: [NotLoggedInGuard]
     },
     {
         path: 'products',
