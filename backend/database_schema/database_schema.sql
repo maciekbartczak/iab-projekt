@@ -159,6 +159,9 @@ VALUES (3, 'admin', '$2y$10$ZS4jxTbECMfE.9Cz9QLLiO9ANM87enbtpKRvLiGa6RWx6DxwdAzI
 INSERT INTO Category (id, name, description)
 VALUES (1, 'Notebook', 'Description');
 
+INSERT INTO Category (id, name, description)
+VALUES (2, 'Smartphone', 'Description');
+
 INSERT INTO Product (id, name, description, price, imageUrl)
 VALUES (1, 'Apple MacBook Air M1/8GB/256/Mac OS Space Gray', '', 4600, 'product_images/macbook-air-space-gray.jpg');
 INSERT INTO ProductCategories
@@ -178,6 +181,11 @@ INSERT INTO Product (id, name, description, price, imageUrl)
 VALUES (4, 'Apple MacBook Pro M1/16GB/256/Mac OS Space Gray', '', 7100, 'product_images/macbook-pro-space-gray.png');
 INSERT INTO ProductCategories
 VALUES (4, 1);
+
+INSERT INTO Product (id, name, description, price, imageUrl)
+VALUES (5, 'Apple iPhone 13 256GB Midnight', '', 4699, 'product_images/iphone-13-midnight.png');
+INSERT INTO ProductCategories
+VALUES (5, 2);
 
 INSERT INTO ShoppingCart (UserId, total)
 VALUES (1, 0);

@@ -1,9 +1,20 @@
 <nb-layout-column>
     <div [nbSpinner]="loading" nbSpinnerSize="giant" nbSpinnerStatus="primary" class="product-list-wrapper">
+        <div class="filter-wrapper">
+            <nb-select multiple placeholder="Category" class="category-filter" status="primary"
+                       [(selected)]="selectedCategories" (selectedChange)="filterChange.next(selectedCategories)">
+                <nb-option *ngFor="let category of categories" [value]="category">{{category.name}}</nb-option>
+            </nb-select>
+        </div>
+
         <app-product-table [products]="products" (addToCartEvent)="addToCart($event)"></app-product-table>
         <div class="pagination">
-            <button nbButton outline status="primary" [disabled]="pageNumber === 1" (click)="pageChange(-1)">< Previous</button>
-            <button nbButton outline status="primary" [disabled]="pageNumber === totalPages" (click)="pageChange(1)">Next ></button>
+            <button nbButton outline status="primary" [disabled]="pageNumber === 1" (click)="pageChange(-1)"><
+                Previous
+            </button>
+            <button nbButton outline status="primary" [disabled]="pageNumber === totalPages" (click)="pageChange(1)">
+                Next >
+            </button>
         </div>
     </div>
 </nb-layout-column>
