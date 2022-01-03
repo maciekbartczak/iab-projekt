@@ -14,8 +14,9 @@ This is a project for IAB (internet database applications) course. It's a simple
 ## Running the application
 
 ### Running backend
+Unsample the env.sample.php file
 
-Use the provided ```docker-compose.yaml``` file to run the backend in Docker.
+Then use the provided ```docker-compose.yaml``` file to run the backend in Docker.
 ```
 docker-compose up 
 ```
